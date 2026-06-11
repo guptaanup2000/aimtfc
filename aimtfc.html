@@ -1,0 +1,2949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AIM Trade Finance Consultancy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ── TOKENS ─────────────────────────────────────────────────────────────── */
+:root {
+  --bg:       #07090f;
+  --surface:  #0d1120;
+  --card:     #111827;
+  --card2:    #151f30;
+  --border:   #1e2d45;
+  --border2:  #243450;
+  --gold:     #c9a84c;
+  --gold-dim: #a07830;
+  --teal:     #00bcd4;
+  --red:      #ef5350;
+  --green:    #26a69a;
+  --green2:   #4caf50;
+  --orange:   #ff8f00;
+  --text:     #e8edf5;
+  --text2:    #a8b4c8;
+  --muted:    #4a5a78;
+  --nav-h:    60px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(7,9,15,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-right: 32px;
+  flex-shrink: 0;
+}
+
+.nav-icon {
+  width: 32px; height: 32px;
+  background: var(--gold);
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: 16px;
+  color: #000;
+}
+
+.nav-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text2);
+}
+
+.nav-name span { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 5px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: color 0.18s, background 0.18s;
+  white-space: nowrap;
+}
+
+.nav-link:hover { color: var(--text2); background: rgba(255,255,255,0.04); }
+
+.nav-link.active {
+  color: var(--gold);
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.2);
+}
+
+.nav-link .nl-icon { font-size: 14px; }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.live-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--green2);
+  text-transform: uppercase;
+}
+
+.pulse-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green2);
+  animation: pdot 1.8s ease-in-out infinite;
+}
+
+@keyframes pdot {
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:0.5;transform:scale(0.75);}
+}
+
+.rate-chip {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* hamburger for mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: auto;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  width: 20px; height: 2px;
+  background: var(--text2);
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; position: fixed; top: var(--nav-h); left:0; right:0; background: rgba(7,9,15,0.98); flex-direction: column; align-items: stretch; padding: 16px; border-bottom: 1px solid var(--border); gap: 4px; }
+  .nav-links.open { display: flex; }
+  .hamburger { display: flex; }
+  .nav-right .rate-chip { display: none; }
+}
+
+/* ── PAGE SHELL ──────────────────────────────────────────────────────────── */
+.page-shell {
+  padding-top: var(--nav-h);
+  min-height: 100vh;
+}
+
+/* each tab is a "page" */
+.tab-page { display: none; }
+.tab-page.active { display: block; }
+
+/* ── SHARED LAYOUT ───────────────────────────────────────────────────────── */
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 28px 80px;
+}
+
+/* section strip header */
+.sec-strip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-radius: 7px;
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+  margin: 40px 0 20px;
+}
+
+.sec-strip-bg {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.3) saturate(0.6);
+}
+
+.sec-strip-ov {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg,rgba(7,9,15,0.92) 0%,rgba(7,9,15,0.5) 60%,transparent 100%);
+}
+
+.sec-strip-ct {
+  position: relative; z-index:2;
+  display: flex; align-items: center;
+  gap: 12px; padding: 0 20px; width: 100%;
+}
+
+.sec-strip-ct .ico { font-size: 20px; }
+
+.sec-strip-ct .ttl {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text2);
+}
+
+.sec-strip-ct .ttl strong { color: var(--gold); }
+.sec-strip-ct .ln { flex:1; height:1px; background: linear-gradient(90deg,var(--border2),transparent); }
+
+/* card base */
+.c {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px 24px;
+}
+
+/* grid helpers */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+
+@media(max-width:900px){ .g4{grid-template-columns:repeat(2,1fr);} .g3{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:640px){ .g2{grid-template-columns:1fr;} .g3{grid-template-columns:1fr;} }
+
+/* ── HOME / NEWS PAGE ────────────────────────────────────────────────────── */
+.hero-news {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 32px;
+}
+
+.hn-bg {
+  position: absolute; inset:0;
+  background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1400&q=80&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.45) saturate(0.65);
+  animation: sZoom 25s ease-in-out infinite alternate;
+}
+
+@keyframes sZoom { from{transform:scale(1);} to{transform:scale(1.08);} }
+
+.hn-ov {
+  position: absolute; inset:0;
+  background: linear-gradient(to top, rgba(7,9,15,1) 0%, rgba(7,9,15,0.6) 50%, rgba(7,9,15,0.1) 100%);
+}
+
+.hn-content {
+  position: relative; z-index:2;
+  padding: 32px 36px;
+}
+
+.hn-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.hn-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 14px;
+  max-width: 600px;
+}
+
+.hn-rate-row {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+
+.hn-rate-big {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.hn-change {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 3px;
+}
+
+.hn-change.up { background: rgba(38,166,154,0.2); color: #26a69a; }
+.hn-change.down { background: rgba(239,83,80,0.18); color: #ef5350; }
+
+/* Ticker tape */
+.ticker-wrap {
+  background: rgba(201,168,76,0.07);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 0;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  height: 38px;
+}
+
+.ticker-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,168,76,0.12);
+  padding: 0 14px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid rgba(201,168,76,0.2);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.ticker-scroll-outer {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.ticker-scroll {
+  display: flex;
+  gap: 40px;
+  animation: tickerMove 40s linear infinite;
+  white-space: nowrap;
+}
+
+.ticker-scroll:hover { animation-play-state: paused; }
+
+@keyframes tickerMove {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text2);
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.ticker-item .t-sep { color: var(--muted); }
+
+/* News grid */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+  margin-bottom: 12px;
+}
+
+.news-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.news-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-3px);
+}
+
+.news-card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: var(--surface);
+  display: block;
+  position: relative;
+}
+
+.news-card-img-ph {
+  width: 100%; height: 160px;
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.news-card-body {
+  padding: 16px 18px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.news-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.news-source {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.news-time {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+}
+
+.news-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 2px;
+  background: rgba(201,168,76,0.1);
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.2);
+}
+
+.news-tag.rbi   { background: rgba(0,188,212,0.1); color: var(--teal); border-color: rgba(0,188,212,0.2); }
+.news-tag.oil   { background: rgba(255,143,0,0.1); color: var(--orange); border-color: rgba(255,143,0,0.2); }
+.news-tag.trade { background: rgba(76,175,80,0.1); color: var(--green2); border-color: rgba(76,175,80,0.2); }
+.news-tag.macro { background: rgba(239,83,80,0.1); color: var(--red); border-color: rgba(239,83,80,0.2); }
+
+.news-headline {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.news-snippet {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.6;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-read-more {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* sentiment badge */
+.sentiment-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.sbull { background: rgba(76,175,80,0.1); color: var(--green2); border: 1px solid rgba(76,175,80,0.2); }
+.sbear { background: rgba(239,83,80,0.1); color: var(--red); border: 1px solid rgba(239,83,80,0.2); }
+.sneut { background: rgba(74,90,120,0.2); color: var(--muted); border: 1px solid var(--border); }
+
+/* news loading skeleton */
+.skeleton-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  animation: shimmer 1.4s infinite;
+}
+
+.skel-img { width:100%; height:160px; background: var(--surface); }
+.skel-body { padding: 16px 18px; display:flex; flex-direction:column; gap:10px; }
+.skel-line { height:12px; background:var(--surface); border-radius:3px; }
+
+@keyframes shimmer {
+  0%,100% { opacity:1; }
+  50% { opacity: 0.6; }
+}
+
+/* news empty / error */
+.news-empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+}
+
+/* Impact score bar */
+.impact-bar-wrap { margin-top: 28px; }
+
+.impact-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.impact-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.impact-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text2);
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.impact-track {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.impact-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+.impact-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text2);
+  width: 40px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── RATE PAGE ───────────────────────────────────────────────────────────── */
+.rate-hero {
+  position: relative;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 28px;
+}
+
+.rate-hero-bg {
+  position: absolute; inset:0;
+  background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&q=80&auto=format&fit=crop');
+  background-size: cover; background-position: center 40%;
+  filter: saturate(0.55) brightness(0.5);
+  animation: sZoom 30s ease-in-out infinite alternate;
+}
+
+.rate-hero-ov {
+  position: absolute; inset:0;
+  background: linear-gradient(to bottom, rgba(7,9,15,0.15) 0%, rgba(7,9,15,0.82) 70%, rgba(7,9,15,1) 100%);
+}
+
+.rate-hero-wm {
+  position: absolute;
+  right: 20px; top: -15px;
+  font-family: 'Playfair Display', serif;
+  font-size: 240px; font-weight: 900;
+  color: rgba(201,168,76,0.05);
+  pointer-events: none; user-select: none;
+  line-height: 1;
+}
+
+.rate-hero-ct {
+  position: relative; z-index:2;
+  padding: 36px 40px;
+}
+
+.rh-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px;
+}
+
+.rh-num {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(60px, 9vw, 100px);
+  color: #fff; line-height: 0.9;
+  letter-spacing: -3px;
+}
+
+.rh-sym {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.28em; color: var(--gold);
+  vertical-align: super;
+}
+
+.rh-meta {
+  display: flex; align-items: center;
+  gap: 14px; margin-top: 16px; flex-wrap: wrap;
+}
+
+.change-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600;
+  padding: 4px 12px; border-radius: 3px;
+}
+.change-badge.up   { background: rgba(38,166,154,0.2); color: #26a69a; border:1px solid rgba(38,166,154,0.3); }
+.change-badge.down { background: rgba(239,83,80,0.18); color: #ef5350; border:1px solid rgba(239,83,80,0.3); }
+
+.rh-stats { display:flex; gap:28px; flex-wrap:wrap; }
+.rh-stat .sv { font-family:'IBM Plex Mono',monospace; font-size:16px; color:var(--text); }
+.rh-stat .sl { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:3px; }
+
+/* rate cards */
+.rcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 18px 20px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.rcard:hover { border-color: var(--border2); transform: translateY(-2px); }
+.rcard::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:var(--border2); }
+.rcard.rc-gold::before  { background:var(--gold); }
+.rcard.rc-teal::before  { background:var(--teal); }
+.rcard.rc-grn::before   { background:var(--green2); }
+.rcard.rc-red::before   { background:var(--red); }
+.rc-lbl { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+.rc-val { font-family:'IBM Plex Mono',monospace; font-size:22px; color:var(--text); }
+.rcard.rc-gold .rc-val { color:var(--gold); }
+.rcard.rc-teal .rc-val { color:var(--teal); }
+.rcard.rc-grn  .rc-val { color:var(--green2); }
+.rc-sub { font-size:11px; color:var(--muted); margin-top:5px; }
+
+/* chart */
+.chart-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:24px; margin-bottom:8px; }
+.chart-hd { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:8px; }
+.chart-hd-ttl { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+.tabs { display:flex; gap:4px; }
+.tab { font-family:'IBM Plex Mono',monospace; font-size:10px; padding:5px 12px; border-radius:3px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; letter-spacing:1px; transition:all 0.18s; }
+.tab:hover,.tab.active { background:var(--gold); color:#000; border-color:var(--gold); }
+canvas#chart { width:100%!important; height:200px!important; }
+
+/* sources */
+.src-card { background:var(--card); border:1px solid var(--border); border-radius:7px; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; transition:border-color 0.2s; }
+.src-card:hover { border-color:var(--border2); }
+.src-nm { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); }
+.src-rt { font-family:'IBM Plex Mono',monospace; font-size:16px; color:var(--text); }
+
+/* ── MANUAL RATE ─────────────────────────────────────────────────────────── */
+.manual-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 26px 30px;
+  position: relative; overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.manual-card::after {
+  content: '₹$';
+  position: absolute; right:20px; top:-12px;
+  font-family: 'Playfair Display', serif;
+  font-size: 110px; font-weight:900;
+  color: rgba(201,168,76,0.05);
+  pointer-events:none;
+}
+
+.mc-hd { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
+.mc-title-row { display:flex; align-items:center; gap:10px; }
+.mc-title { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); }
+
+.rbadge { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; padding:3px 9px; border-radius:3px; font-weight:600; text-transform:uppercase; }
+.rbadge-live   { background:rgba(76,175,80,0.1); color:var(--green2); border:1px solid rgba(76,175,80,0.25); }
+.rbadge-manual { background:rgba(201,168,76,0.1); color:var(--gold); border:1px solid rgba(201,168,76,0.25); }
+
+.clear-btn { font-family:'IBM Plex Mono',monospace; font-size:10px; padding:7px 14px; background:transparent; border:1px solid var(--border2); border-radius:4px; color:var(--muted); cursor:pointer; transition:all 0.2s; letter-spacing:1px; }
+.clear-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+.mc-body { display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:start; }
+@media(max-width:600px){ .mc-body{grid-template-columns:1fr;} }
+
+.mi-label { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:9px; }
+.big-shell { display:flex; align-items:center; background:var(--surface); border:2px solid var(--border2); border-radius:8px; overflow:hidden; transition:border-color 0.2s,box-shadow 0.2s; }
+.big-shell:focus-within { border-color:var(--gold); box-shadow:0 0 0 4px rgba(201,168,76,0.1); }
+.big-sym { font-family:'Playfair Display',serif; font-size:30px; color:var(--gold-dim); padding:0 14px; border-right:1px solid var(--border2); user-select:none; }
+.big-input { flex:1; background:transparent; border:none; outline:none; font-family:'IBM Plex Mono',monospace; font-size:40px; font-weight:600; color:var(--gold); padding:12px 14px; width:100%; letter-spacing:-1px; }
+.big-input::placeholder { color:rgba(74,90,120,0.4); font-weight:300; }
+.big-input::-webkit-outer-spin-button,.big-input::-webkit-inner-spin-button{-webkit-appearance:none;}
+.big-input[type=number]{-moz-appearance:textfield;}
+.mi-hint { font-size:11px; color:var(--muted); margin-top:9px; line-height:1.7; font-family:'IBM Plex Mono',monospace; }
+
+.cmp-cards { display:flex; flex-direction:column; gap:9px; }
+.cmp-c { background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:11px 14px; display:flex; justify-content:space-between; align-items:center; }
+.cmp-c.cmp-active { border-color:rgba(201,168,76,0.25); background:rgba(201,168,76,0.04); }
+.cmp-l { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+.cmp-v { font-family:'IBM Plex Mono',monospace; font-size:19px; color:var(--text); }
+
+/* ── CALCULATORS ─────────────────────────────────────────────────────────── */
+.calc-pair { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media(max-width:768px){ .calc-pair{grid-template-columns:1fr;} }
+
+.calc-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:24px; position:relative; overflow:hidden; }
+.calc-card.exp-c { border-top:3px solid var(--gold); }
+.calc-card.imp-c { border-top:3px solid var(--teal); }
+
+.cc-bg { position:absolute; top:0; right:0; width:160px; height:160px; background-size:cover; background-position:center; opacity:0.06; border-radius:0 8px 0 0; pointer-events:none; }
+
+.cc-title { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:20px; position:relative; z-index:1; }
+.exp-c .cc-title { color:var(--gold); }
+.imp-c .cc-title { color:var(--teal); }
+
+.fstack { display:flex; flex-direction:column; gap:13px; position:relative; z-index:1; }
+
+.fl { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
+
+.ph { color:var(--gold); font-size:10px; }
+.imp-c .ph { color:var(--teal); }
+
+.ishell { display:flex; align-items:stretch; background:var(--surface); border:1px solid var(--border); border-radius:5px; overflow:hidden; transition:border-color 0.2s; }
+.ishell:focus-within { border-color:var(--gold); }
+.imp-c .ishell:focus-within { border-color:var(--teal); }
+.ishell input { flex:1; background:transparent; border:none; outline:none; font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--text); padding:9px 12px; min-width:0; }
+.utag { display:flex; align-items:center; padding:0 11px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); background:rgba(255,255,255,0.03); border-left:1px solid var(--border); white-space:nowrap; }
+
+/* currency selector in calculators */
+.ccy-select {
+  background: rgba(255,255,255,0.05);
+  border: none;
+  border-left: 1px solid var(--border);
+  outline: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  padding: 0 10px;
+  cursor: pointer;
+  height: 100%;
+  min-width: 60px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23c9a84c' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  padding-right: 22px;
+}
+.ccy-select option { background:#111827; color:var(--text); }
+.imp-c .ccy-select { color: var(--teal); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2300bcd4' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); }
+
+.ccy-rate-hint { font-size:10px; color:var(--muted); margin-top:5px; font-family:'IBM Plex Mono',monospace; }
+.ccy-rate-hint span { color:var(--gold); }
+.imp-c .ccy-rate-hint span { color:var(--teal); }
+
+.slider-wrap input[type=range] { width:100%; accent-color:var(--gold); cursor:pointer; margin-top:5px; }
+.imp-c .slider-wrap input[type=range] { accent-color:var(--teal); }
+.slider-ticks { display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--muted); margin-top:2px; }
+
+.bk { background:rgba(201,168,76,0.04); border:1px solid rgba(201,168,76,0.12); border-radius:5px; padding:12px 13px; display:flex; flex-direction:column; gap:5px; font-family:'IBM Plex Mono',monospace; font-size:11px; }
+.imp-c .bk { background:rgba(0,188,212,0.04); border-color:rgba(0,188,212,0.12); }
+.bk-r { display:flex; justify-content:space-between; color:var(--muted); }
+.bk-r.bd span:last-child { color:var(--red); }
+.bk-r.ba span:last-child { color:var(--green2); }
+.imp-c .bk-r.ba span:last-child { color:var(--red); }
+.bk-r.bt { color:var(--text); font-weight:600; font-size:12px; }
+.exp-c .bk-r.bt span:last-child { color:var(--gold); }
+.imp-c .bk-r.bt span:last-child { color:var(--teal); }
+.bk-sep { height:1px; background:var(--border); margin:2px 0; }
+
+.pnl-r { display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:5px; padding:10px 13px; }
+.pnl-l { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+.pnl-v { font-family:'IBM Plex Mono',monospace; font-size:17px; }
+
+/* ── OIL SECTION ─────────────────────────────────────────────────────────── */
+.oil-card {
+  background:var(--card); border:1px solid var(--border); border-top:3px solid var(--orange);
+  border-radius:8px; padding:26px; position:relative; overflow:hidden;
+}
+
+.oil-bg { position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1200&q=70&auto=format&fit=crop'); background-size:cover; background-position:center 30%; opacity:0.06; pointer-events:none; }
+
+.oil-title { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--orange); margin-bottom:20px; position:relative; z-index:1; }
+
+.oil-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; position:relative; z-index:1; }
+@media(max-width:640px){ .oil-grid{grid-template-columns:1fr;} }
+
+.os { background:var(--surface); border:1px solid var(--border); border-radius:5px; padding:11px 14px; display:flex; justify-content:space-between; align-items:center; }
+.os .ol { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+.os .ov { font-family:'IBM Plex Mono',monospace; font-size:15px; color:var(--text); }
+.os.warn .ov { color:var(--red); }
+.os.good .ov { color:var(--green2); }
+.os.neutral .ov { color:var(--orange); }
+
+.gauge-wrap { background:var(--surface); border:1px solid var(--border); border-radius:5px; padding:13px 14px; }
+.gauge-l { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:9px; }
+.gauge-track { width:100%; height:8px; background:var(--border); border-radius:4px; overflow:hidden; }
+.gauge-fill { height:100%; border-radius:4px; transition:width 0.5s ease,background 0.5s; }
+.gauge-scale { display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--muted); margin-top:4px; }
+
+.oil-insight { background:rgba(255,143,0,0.06); border:1px solid rgba(255,143,0,0.18); border-radius:5px; padding:13px 14px; font-size:12px; color:var(--text2); line-height:1.7; }
+.oil-insight strong { color:var(--orange); font-family:'IBM Plex Mono',monospace; font-size:11px; }
+
+/* ── FOOTER ──────────────────────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+}
+
+.ft { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); line-height:1.8; }
+.ft-logo { font-family:'Playfair Display',serif; font-size:22px; color:var(--gold); opacity:0.4; }
+
+/* div label */
+.dlabel { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); text-align:center; position:relative; margin:36px 0 4px; }
+.dlabel::before,.dlabel::after { content:''; position:absolute; top:50%; width:42%; height:1px; }
+.dlabel::before { left:0; background:linear-gradient(90deg,transparent,var(--border)); }
+.dlabel::after  { right:0; background:linear-gradient(270deg,transparent,var(--border)); }
+
+/* loading spinner */
+.spinner { display:inline-block; width:18px; height:18px; border:2px solid var(--border); border-top-color:var(--gold); border-radius:50%; animation:spin 0.7s linear infinite; }
+@keyframes spin{ to{transform:rotate(360deg);} }
+
+.news-loading { display:flex; align-items:center; justify-content:center; gap:10px; padding:60px; color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:12px; grid-column:1/-1; }
+
+/* scroll offset for anchor nav */
+.tab-page { scroll-margin-top: var(--nav-h); }
+
+/* refresh btn */
+.refresh-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 1.5px;
+  padding: 7px 16px; background: transparent;
+  border: 1px solid var(--border2); border-radius: 4px;
+  color: var(--muted); cursor: pointer;
+  transition: all 0.2s;
+}
+.refresh-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── HOME DASHBOARD ──────────────────────────────────────────────────────── */
+.home-hero {
+  position: relative; min-height: 300px;
+  border-radius: 10px; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.hh-bg {
+  position: absolute; inset:0;
+  background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&q=80&auto=format&fit=crop');
+  background-size: cover; background-position: center 35%;
+  filter: saturate(0.55) brightness(0.45);
+  animation: sZoom 30s ease-in-out infinite alternate;
+}
+.hh-ov { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(7,9,15,0.1) 0%,rgba(7,9,15,0.75) 60%,rgba(7,9,15,1) 100%); }
+.hh-wm { position:absolute; right:20px; top:-10px; font-family:'Playfair Display',serif; font-size:200px; font-weight:900; color:rgba(201,168,76,0.05); pointer-events:none; user-select:none; line-height:1; }
+.hh-ct { position:relative; z-index:2; padding:28px 36px; }
+.hh-eyebrow { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.hh-title { font-family:'Playfair Display',serif; font-weight:900; font-size:clamp(28px,5vw,52px); color:#fff; line-height:1.1; margin-bottom:14px; }
+.hh-rate-row { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.hh-rate { font-family:'IBM Plex Mono',monospace; font-size:28px; font-weight:600; color:var(--gold); }
+.hh-meta { display:flex; flex-direction:column; gap:4px; }
+.hh-badge { font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 10px; border-radius:3px; font-weight:600; }
+.hh-badge.up   { background:rgba(38,166,154,0.2); color:#26a69a; }
+.hh-badge.down { background:rgba(239,83,80,0.18); color:#ef5350; }
+.hh-updated { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--muted); }
+
+/* home ticker */
+.home-ticker {
+  display: flex; align-items: center;
+  background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 6px; height: 36px; overflow: hidden; margin-bottom: 18px;
+}
+.ht-lbl { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); background:rgba(201,168,76,0.1); padding:0 14px; height:100%; display:flex; align-items:center; border-right:1px solid rgba(201,168,76,0.15); flex-shrink:0; }
+.ht-items { display:flex; align-items:center; gap:20px; padding:0 20px; overflow-x:auto; scrollbar-width:none; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text2); white-space:nowrap; }
+.ht-items::-webkit-scrollbar { display:none; }
+.ht-dot { color:var(--muted); }
+.ht-items b { color:var(--gold); }
+
+/* quick stats */
+.home-stats-row {
+  display: grid; grid-template-columns: repeat(6,1fr); gap: 12px;
+  margin-bottom: 32px;
+}
+@media(max-width:900px){ .home-stats-row{ grid-template-columns:repeat(3,1fr); } }
+@media(max-width:500px){ .home-stats-row{ grid-template-columns:repeat(2,1fr); } }
+.hstat { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:14px 16px; text-align:center; transition:border-color 0.2s; }
+.hstat:hover { border-color:var(--border2); }
+.hstat-val { font-family:'IBM Plex Mono',monospace; font-size:16px; color:var(--text); margin-bottom:4px; }
+.hstat-lbl { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+
+/* widget section */
+.widget-section-title {
+  font-family:'Playfair Display',serif; font-size:22px; font-weight:700;
+  color:var(--text); margin-bottom:18px;
+}
+.widgets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 8px;
+}
+@media(max-width:900px){ .widgets-grid{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:540px){ .widgets-grid{ grid-template-columns:1fr; } }
+
+.widget {
+  position: relative; min-height: 280px;
+  border-radius: 8px; overflow: hidden;
+  cursor: pointer; border: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
+}
+.widget:hover { transform: translateY(-5px); box-shadow: 0 16px 50px rgba(0,0,0,0.45); }
+
+.widget-bg {
+  position: absolute; inset:0; background-size:cover; background-position:center;
+  filter: brightness(0.32) saturate(0.6);
+  transition: filter 0.28s, transform 0.28s;
+}
+.widget:hover .widget-bg { filter: brightness(0.46) saturate(0.8); transform: scale(1.05); }
+
+.widget-ov {
+  position: absolute; inset:0;
+  background: linear-gradient(to top, rgba(7,9,15,0.97) 0%, rgba(7,9,15,0.55) 55%, rgba(7,9,15,0.05) 100%);
+}
+
+/* accent top border per widget type */
+.widget::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; z-index:3; }
+.w-rates::before    { background: var(--gold); }
+.w-tf::before       { background: linear-gradient(90deg, var(--gold), var(--teal)); }
+.w-export::before   { background: var(--gold); }
+.w-import::before   { background: var(--teal); }
+.w-oil::before      { background: var(--orange); }
+.w-override::before { background: var(--green2); }
+
+.widget:hover.w-rates    { border-color: var(--gold); }
+.widget:hover.w-tf       { border-color: var(--gold); }
+.widget:hover.w-export   { border-color: var(--gold); }
+.widget:hover.w-import   { border-color: var(--teal); }
+.widget:hover.w-oil      { border-color: var(--orange); }
+.widget:hover.w-override { border-color: var(--green2); }
+
+.widget-ct {
+  position: relative; z-index:2;
+  padding: 22px 20px; display:flex; flex-direction:column; gap:8px;
+}
+.widget-icon { font-size: 26px; }
+.widget-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:#fff; line-height:1.1; }
+.widget-desc { font-size:12px; color:var(--text2); line-height:1.6; }
+.widget-features { display:flex; flex-direction:column; gap:4px; margin-top:2px; }
+.widget-features span { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); }
+.widget-cta { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-top:4px; transition: letter-spacing 0.2s; }
+.w-import  .widget-cta { color:var(--teal); }
+.w-oil     .widget-cta { color:var(--orange); }
+.w-override .widget-cta { color:var(--green2); }
+.widget:hover .widget-cta { letter-spacing:2.5px; }
+
+/* ── ENQUIRY FORM ────────────────────────────────────────────────────────── */
+.enq-section { margin-top: 48px; }
+
+.enq-wrap {
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 0;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+}
+@media(max-width:800px){ .enq-wrap{ grid-template-columns:1fr; } }
+
+.enq-left {
+  background: linear-gradient(160deg, #0d1420 0%, #111827 100%);
+  border-right: 1px solid var(--border);
+  padding: 36px 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  position: relative; overflow: hidden;
+}
+.enq-left::before {
+  content:'₹'; position:absolute; right:-10px; bottom:-30px;
+  font-family:'Playfair Display',serif; font-size:180px; font-weight:900;
+  color:rgba(201,168,76,0.05); pointer-events:none; user-select:none; line-height:1;
+}
+
+.enq-eyebrow { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+.enq-title { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--text); line-height:1.2; }
+.enq-desc { font-size:13px; color:var(--text2); line-height:1.7; }
+
+.enq-promises { display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+.enq-promise { display:flex; align-items:center; gap:10px; font-size:12px; color:var(--text2); }
+.ep-icon { font-size:16px; flex-shrink:0; }
+
+.enq-right { padding: 32px 28px; }
+.enq-form-title { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:20px; }
+
+.enq-fields { display:flex; flex-direction:column; gap:14px; }
+.enq-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media(max-width:500px){ .enq-row{ grid-template-columns:1fr; } }
+
+.enq-field { display:flex; flex-direction:column; gap:5px; }
+.enq-label { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); }
+.enq-req { color:var(--gold); }
+
+.enq-input-wrap {
+  display:flex; align-items:center;
+  background:var(--surface); border:1px solid var(--border); border-radius:5px;
+  overflow:hidden; transition:border-color 0.2s;
+}
+.enq-input-wrap:focus-within { border-color:var(--gold); }
+
+.enq-input-icon { padding:0 10px; font-size:14px; flex-shrink:0; opacity:0.6; }
+
+.enq-input {
+  flex:1; background:transparent; border:none; outline:none;
+  font-family:'Inter',sans-serif; font-size:13px; color:var(--text);
+  padding:10px 10px 10px 0; min-width:0;
+}
+.enq-input::placeholder { color:var(--muted); font-size:12px; }
+
+.enq-select-wrap {
+  background:var(--surface); border:1px solid var(--border); border-radius:5px;
+  transition:border-color 0.2s;
+}
+.enq-select-wrap:focus-within { border-color:var(--gold); }
+
+.enq-select {
+  width:100%; background:transparent; border:none; outline:none;
+  font-family:'Inter',sans-serif; font-size:13px; color:var(--text);
+  padding:10px 12px; cursor:pointer; appearance:none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a5a78' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position: right 12px center;
+}
+.enq-select option { background:#111827; color:var(--text); }
+.enq-select optgroup { color:var(--gold); font-size:11px; }
+
+.enq-textarea {
+  width:100%; background:var(--surface); border:1px solid var(--border);
+  border-radius:5px; outline:none; font-family:'Inter',sans-serif; font-size:13px;
+  color:var(--text); padding:10px 12px; resize:none; line-height:1.6;
+  transition:border-color 0.2s;
+}
+.enq-textarea:focus { border-color:var(--gold); }
+.enq-textarea::placeholder { color:var(--muted); font-size:12px; }
+
+.enq-char-count { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--muted); text-align:right; margin-top:3px; }
+
+.enq-err { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--red); min-height:13px; }
+
+.enq-submit {
+  width:100%; padding:14px; background:var(--gold); border:none; border-radius:6px;
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px;
+  text-transform:uppercase; color:#000; font-weight:600;
+  cursor:pointer; margin-top:4px; transition:all 0.2s;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+}
+.enq-submit:hover { background:#e0bb5a; box-shadow:0 4px 20px rgba(201,168,76,0.3); }
+.enq-submit:active { transform:scale(0.98); }
+
+.enq-spinner {
+  width:16px; height:16px; border:2px solid rgba(0,0,0,0.3);
+  border-top-color:#000; border-radius:50%; animation:spin 0.7s linear infinite;
+}
+
+.enq-success-wrap {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:40px 20px; gap:14px; min-height:400px;
+}
+.enq-success-icon { font-size:52px; }
+.enq-success-title { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--green2); }
+.enq-success-msg { font-size:14px; color:var(--text2); line-height:1.7; max-width:340px; }
+.enq-reset-btn {
+  margin-top:8px; padding:10px 24px; background:transparent;
+  border:1px solid var(--border2); border-radius:5px;
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--muted); cursor:pointer; transition:all 0.2s;
+}
+.enq-reset-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+/* 3 category selector cards */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 36px;
+}
+@media(max-width:860px){ .cat-grid{ grid-template-columns:1fr; gap:16px; } }
+
+.cat-card {
+  position: relative;
+  min-height: 340px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.cat-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+.cat-card.cat-export:hover  { border-color: var(--gold); }
+.cat-card.cat-import:hover  { border-color: var(--teal); }
+.cat-card.cat-domestic:hover{ border-color: var(--green2); }
+
+.cat-card-bg {
+  position: absolute; inset:0;
+  background-size: cover; background-position: center;
+  filter: brightness(0.38) saturate(0.65);
+  transition: filter 0.3s, transform 0.3s;
+}
+.cat-card:hover .cat-card-bg { filter: brightness(0.5) saturate(0.8); transform: scale(1.04); }
+
+.cat-card-ov {
+  position: absolute; inset:0;
+  background: linear-gradient(to top, rgba(7,9,15,0.97) 0%, rgba(7,9,15,0.6) 55%, rgba(7,9,15,0.1) 100%);
+}
+
+.cat-card-ct {
+  position: relative; z-index:2;
+  padding: 26px 24px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.cat-icon { font-size: 32px; }
+
+.cat-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 700;
+  color: #fff; line-height: 1.1;
+}
+.cat-export  .cat-title { color: var(--gold); }
+.cat-import  .cat-title { color: var(--teal); }
+.cat-domestic .cat-title { color: var(--green2); }
+
+.cat-sub {
+  font-size: 12px; color: var(--text2);
+  line-height: 1.6; max-width: 280px;
+}
+
+.cat-products {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 4px;
+}
+
+.cat-pill {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 1px;
+  padding: 3px 9px; border-radius: 2px;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  background: rgba(255,255,255,0.03);
+  white-space: nowrap;
+}
+
+.cat-cta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 6px;
+  transition: color 0.2s;
+}
+.cat-export  .cat-cta { color: var(--gold); }
+.cat-import  .cat-cta { color: var(--teal); }
+.cat-domestic .cat-cta { color: var(--green2); }
+
+/* detail panel */
+.detail-nav {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 20px; flex-wrap: wrap;
+}
+.back-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 8px 16px; background: transparent;
+  border: 1px solid var(--border2); border-radius: 4px;
+  color: var(--muted); cursor: pointer; transition: all 0.2s;
+}
+.back-btn:hover { border-color: var(--gold); color: var(--gold); }
+.detail-nav-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 700; color: var(--text);
+}
+
+/* sub filter */
+.tf-filter-row {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.tf-filter {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 7px 16px; background: transparent;
+  border: 1px solid var(--border); border-radius: 4px;
+  color: var(--muted); cursor: pointer; transition: all 0.18s;
+}
+.tf-filter:hover { border-color: var(--gold); color: var(--gold-dim); }
+.tf-filter.active { background: var(--gold); color: #000; border-color: var(--gold); }
+
+/* tf product cards grid */
+.tf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+  gap: 20px;
+  margin-bottom: 36px;
+}
+@media(max-width:520px){ .tf-grid{ grid-template-columns:1fr; } }
+
+.tf-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+}
+.tf-card:hover { transform: translateY(-3px); border-color: var(--border2); }
+
+.tf-card-stripe { height: 3px; }
+.exp-stripe  { background: var(--gold); }
+.imp-stripe  { background: var(--teal); }
+.dom-stripe  { background: var(--green2); }
+.nfb-stripe  { background: var(--muted); }
+
+.tf-card-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 12px; padding: 18px 20px 14px;
+}
+.tf-instrument {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px; font-weight: 600;
+  color: var(--text); margin-bottom: 8px;
+}
+.tf-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.tf-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 2px;
+}
+.tag-exp  { background: rgba(201,168,76,0.12);  color: var(--gold);   border: 1px solid rgba(201,168,76,0.25); }
+.tag-imp  { background: rgba(0,188,212,0.1);    color: var(--teal);   border: 1px solid rgba(0,188,212,0.2); }
+.tag-dom  { background: rgba(76,175,80,0.1);    color: var(--green2); border: 1px solid rgba(76,175,80,0.2); }
+.tag-fund { background: rgba(74,90,120,0.2);    color: var(--text2);  border: 1px solid var(--border); }
+.tag-nfb  { background: rgba(74,90,120,0.12);   color: var(--muted);  border: 1px solid var(--border); }
+.tag-pre  { background: rgba(255,143,0,0.1);    color: var(--orange); border: 1px solid rgba(255,143,0,0.2); }
+.tag-post { background: rgba(38,166,154,0.1);   color: var(--green);  border: 1px solid rgba(38,166,154,0.2); }
+
+.tf-rate-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; white-space: nowrap;
+  padding: 4px 10px; border-radius: 3px;
+  background: rgba(201,168,76,0.1); color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.2); flex-shrink: 0;
+}
+.teal-badge   { background: rgba(0,188,212,0.1); color: var(--teal); border-color: rgba(0,188,212,0.2); }
+.green-badge  { background: rgba(76,175,80,0.1); color: var(--green2); border-color: rgba(76,175,80,0.2); }
+.orange-badge { background: rgba(255,143,0,0.1); color: var(--orange); border-color: rgba(255,143,0,0.2); }
+
+.tf-body { padding: 0 20px 20px; }
+.tf-desc { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 14px; }
+
+.tf-adv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+@media(max-width:540px){ .tf-adv-grid{ grid-template-columns:1fr; } }
+
+.tf-adv {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 5px; padding: 12px 13px;
+}
+.tf-adv-title { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 1px; color: var(--text2); margin-bottom: 8px; }
+.tf-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.tf-list li { font-size: 11px; color: var(--muted); line-height: 1.5; padding-left: 12px; position: relative; }
+.tf-list li::before { content: '–'; position: absolute; left: 0; color: var(--border2); }
+
+.tf-example { background: rgba(201,168,76,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 5px; padding: 14px; }
+.tf-ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.tf-ex-body { display: flex; flex-direction: column; gap: 8px; }
+.tf-ex-scenario { font-size: 12px; color: var(--text2); }
+.ex-rate { color: var(--gold); font-family: 'IBM Plex Mono', monospace; }
+.tf-ex-table { display: flex; flex-direction: column; gap: 4px; }
+.tf-ex-row { display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.tf-ex-total { color: var(--text); font-weight: 600; border-top: 1px solid var(--border2); padding-top: 6px; margin-top: 2px; border-bottom: none; }
+.tf-ex-subhd { color: var(--text2); font-weight: 600; border-bottom: 1px solid var(--border2); padding-bottom: 4px; }
+.ex-num { color: var(--text); }
+.ex-num.neg { color: var(--red); }
+.ex-num.pos { color: var(--green2); }
+.tf-ex-note { font-size: 11px; color: var(--muted); line-height: 1.6; background: rgba(255,255,255,0.02); border-radius: 3px; padding: 8px 10px; }
+
+/* comparison table */
+.tf-compare-wrap { overflow: hidden; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 8px; }
+.tf-compare-scroll { overflow-x: auto; }
+.tf-table { width: 100%; border-collapse: collapse; font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+.tf-table th { background: var(--surface); color: var(--muted); padding: 10px 14px; text-align: left; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.tf-table td { padding: 10px 14px; color: var(--text2); border-bottom: 1px solid rgba(30,45,69,0.5); vertical-align: top; font-size: 11px; }
+.tf-table tr:last-child td { border-bottom: none; }
+.tf-table tr:hover td { background: rgba(255,255,255,0.02); }
+.tr-highlight td { background: rgba(201,168,76,0.04); }
+.tr-highlight td:first-child { border-left: 2px solid var(--gold); }
+
+/* section sub-labels inside detail panel */
+.tf-section-label {
+  grid-column: 1/-1; display: flex; align-items: center;
+  gap: 12px; padding: 10px 0 4px; flex-wrap: wrap;
+}
+.tsl-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 3px;
+}
+.tsl-exp { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.2); }
+.tsl-imp { background: rgba(0,188,212,0.1); color: var(--teal); border: 1px solid rgba(0,188,212,0.2); }
+.tsl-dom { background: rgba(76,175,80,0.1); color: var(--green2); border: 1px solid rgba(76,175,80,0.2); }
+.tsl-nfb { background: rgba(74,90,120,0.15); color: var(--muted); border: 1px solid var(--border); }
+.tsl-desc { font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ══════════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#" onclick="showTab('home');return false;">
+      <div class="nav-icon">A</div>
+      <span class="nav-name"><span>AIM</span> Trade Finance</span>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <button class="nav-link active" onclick="showTab('home')" data-tab="home">
+        <span class="nl-icon">🏠</span> Home
+      </button>
+      <button class="nav-link" onclick="showTab('home-tf')" data-tab="home-tf">
+        <span class="nl-icon">💰</span> Trade Finance
+      </button>
+      <button class="nav-link" onclick="showTab('rates')" data-tab="rates">
+        <span class="nl-icon">📊</span> Live Rates
+      </button>
+      <button class="nav-link" onclick="showTab('export')" data-tab="export">
+        <span class="nl-icon">📤</span> Export Calc
+      </button>
+      <button class="nav-link" onclick="showTab('import')" data-tab="import">
+        <span class="nl-icon">📥</span> Import Calc
+      </button>
+      <button class="nav-link" onclick="showTab('oil')" data-tab="oil">
+        <span class="nl-icon">🛢️</span> Oil Impact
+      </button>
+      <button class="nav-link" onclick="showTab('rate-override')" data-tab="rate-override">
+        <span class="nl-icon">⚙️</span> Rate Override
+      </button>
+    </div>
+
+    <div class="nav-right">
+      <span class="rate-chip">₹<span id="nav-rate">–</span></span>
+      <div class="live-pill"><div class="pulse-dot"></div>Live</div>
+      <button class="hamburger" id="hambBtn" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ PAGE SHELL ══════════════════════════════════════════════════════════ -->
+<div class="page-shell">
+
+<!-- ─── HOME DASHBOARD ────────────────────────────────────────────────────── -->
+<div class="tab-page active" id="tab-home">
+<div class="page-content">
+
+  <!-- Home Hero -->
+  <div class="home-hero">
+    <div class="hh-bg"></div>
+    <div class="hh-ov"></div>
+    <div class="hh-wm">₹$</div>
+    <div class="hh-ct">
+      <div class="hh-eyebrow">AIM Trade Finance Consultancy · USD/INR Terminal</div>
+      <div class="hh-title">Your Trade Finance<br/>Consultancy Partner</div>
+      <div class="hh-rate-row">
+        <div class="hh-rate">₹<span id="hh-rate-val">–</span></div>
+        <div class="hh-meta">
+          <span class="hh-badge up" id="hh-change">● Live</span>
+          <span class="hh-updated" id="hh-updated">Fetching…</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rate ticker strip -->
+  <div class="home-ticker">
+    <span class="ht-lbl">⚡ Live</span>
+    <div class="ht-items">
+      <span>USD/INR <b id="ht-spot">–</b></span>
+      <span class="ht-dot">·</span>
+      <span>Interbank <b id="ht-ib">–</b></span>
+      <span class="ht-dot">·</span>
+      <span>Forward 3M <b id="ht-fwd" style="color:var(--teal)">–</b></span>
+      <span class="ht-dot">·</span>
+      <span>RBI Ref <b id="ht-rbi">–</b></span>
+      <span class="ht-dot">·</span>
+      <span>Export Rate <b id="ht-exp" style="color:var(--green2)">–</b></span>
+      <span class="ht-dot">·</span>
+      <span>SBI TT <b id="ht-sbi">–</b></span>
+      <span class="ht-dot">·</span>
+      <span>EUR/INR <b id="ht-eurinr" style="color:var(--teal)">–</b></span>
+      <span class="ht-dot">·</span>
+      <span>GBP/INR <b id="ht-gbpinr" style="color:var(--gold)">–</b></span>
+      <span class="ht-dot">·</span>
+      <span>CNY/INR <b id="ht-cnyinr" style="color:var(--orange)">–</b></span>
+    </div>
+  </div>
+
+  <!-- Quick stats row -->
+  <div class="home-stats-row">
+    <div class="hstat"><div class="hstat-val" id="hs-spot">–</div><div class="hstat-lbl">Spot Rate</div></div>
+    <div class="hstat"><div class="hstat-val" id="hs-hi" style="color:var(--green2)">–</div><div class="hstat-lbl">Day High</div></div>
+    <div class="hstat"><div class="hstat-val" id="hs-lo" style="color:var(--red)">–</div><div class="hstat-lbl">Day Low</div></div>
+    <div class="hstat"><div class="hstat-val" id="hs-exp" style="color:var(--gold)">–</div><div class="hstat-lbl">Export Rate</div></div>
+    <div class="hstat"><div class="hstat-val" id="hs-fwd" style="color:var(--teal)">–</div><div class="hstat-lbl">Forward 3M</div></div>
+    <div class="hstat"><div class="hstat-val" id="hs-wk">–</div><div class="hstat-lbl">7-Day Δ</div></div>
+  </div>
+
+  <!-- Navigation Widgets Grid -->
+  <div class="widget-section-title">Explore the Terminal</div>
+  <div class="widgets-grid">
+
+    <!-- Live Rates Widget -->
+    <div class="widget w-rates" onclick="showTab('rates')">
+      <div class="widget-bg" style="background-image:url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=70&auto=format&fit=crop');"></div>
+      <div class="widget-ov"></div>
+      <div class="widget-ct">
+        <div class="widget-icon">📊</div>
+        <div class="widget-title">Live Rates & Chart</div>
+        <div class="widget-desc">Real-time USD/INR spot rate, historical chart, RBI reference rate and multi-source comparisons</div>
+        <div class="widget-features">
+          <span>📈 7D · 1M · 3M · 6M Chart</span>
+          <span>🏦 RBI · SBI · Wise · XE</span>
+          <span>📉 Day High / Low</span>
+        </div>
+        <div class="widget-cta">Open Live Rates →</div>
+      </div>
+    </div>
+
+    <!-- Trade Finance Widget -->
+    <div class="widget w-tf" onclick="showTab('home-tf')">
+      <div class="widget-bg" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=70&auto=format&fit=crop');"></div>
+      <div class="widget-ov"></div>
+      <div class="widget-ct">
+        <div class="widget-icon">💰</div>
+        <div class="widget-title">Trade Finance Products</div>
+        <div class="widget-desc">Explore export finance, import finance and domestic working capital with worked examples and comparisons</div>
+        <div class="widget-features">
+          <span>📤 Export Finance (7 products)</span>
+          <span>📥 Import Finance (6 products)</span>
+          <span>🏭 Working Capital (6 products)</span>
+        </div>
+        <div class="widget-cta">Explore Trade Finance →</div>
+      </div>
+    </div>
+
+    <!-- Export Calculator Widget -->
+    <div class="widget w-export" onclick="showTab('export')">
+      <div class="widget-bg" style="background-image:url('https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=600&q=70&auto=format&fit=crop');"></div>
+      <div class="widget-ov"></div>
+      <div class="widget-ct">
+        <div class="widget-icon">📤</div>
+        <div class="widget-title">Export Calculator</div>
+        <div class="widget-desc">Calculate net INR realisation after bank deduction, freight and export incentives with full cost breakup</div>
+        <div class="widget-features">
+          <span>💹 Bank Deduction (Paisa)</span>
+          <span>🚢 Freight in USD</span>
+          <span>✅ RoDTEP / Drawback %</span>
+        </div>
+        <div class="widget-cta">Calculate Realisation →</div>
+      </div>
+    </div>
+
+    <!-- Import Calculator Widget -->
+    <div class="widget w-import" onclick="showTab('import')">
+      <div class="widget-bg" style="background-image:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=70&auto=format&fit=crop');"></div>
+      <div class="widget-ov"></div>
+      <div class="widget-ct">
+        <div class="widget-icon">📥</div>
+        <div class="widget-title">Import Cost Calculator</div>
+        <div class="widget-desc">Compute total landed cost including bank markup, freight, customs duty and your gross margin</div>
+        <div class="widget-features">
+          <span>🏦 Bank Markup (Paisa)</span>
+          <span>🚢 Freight + Customs Duty</span>
+          <span>📊 Gross Margin Analysis</span>
+        </div>
+        <div class="widget-cta">Calculate Landed Cost →</div>
+      </div>
+    </div>
+
+    <!-- Oil Impact Widget -->
+    <div class="widget w-oil" onclick="showTab('oil')">
+      <div class="widget-bg" style="background-image:url('https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&q=70&auto=format&fit=crop');"></div>
+      <div class="widget-ov"></div>
+      <div class="widget-ct">
+        <div class="widget-icon">🛢️</div>
+        <div class="widget-title">Brent Oil Impact</div>
+        <div class="widget-desc">Model how Brent crude price movements affect USD/INR — every $1 rise ≈ 28 paisa INR depreciation</div>
+        <div class="widget-features">
+          <span>📉 28 Paisa / $1 Rule</span>
+          <span>⚖️ Depreciation Gauge</span>
+          <span>🔮 Scenario Modelling</span>
+        </div>
+        <div class="widget-cta">Model Oil Impact →</div>
+      </div>
+    </div>
+
+    <!-- Rate Override Widget -->
+    <div class="widget w-override" onclick="showTab('rate-override')">
+      <div class="widget-bg" style="background-image:url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=70&auto=format&fit=crop');"></div>
+      <div class="widget-ov" style="background:linear-gradient(135deg,rgba(7,9,15,0.92) 0%,rgba(7,9,15,0.7) 100%);"></div>
+      <div class="widget-ct">
+        <div class="widget-icon">⚙️</div>
+        <div class="widget-title">Manual Rate Override</div>
+        <div class="widget-desc">Enter your own interbank or RBI reference rate to model exact realisation across all calculators</div>
+        <div class="widget-features">
+          <span>✎ Up to 4 Decimal Places</span>
+          <span>🔄 Instant Calculator Sync</span>
+          <span>📊 Live vs Manual Diff</span>
+        </div>
+        <div class="widget-cta">Set Custom Rate →</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer tip -->
+  <div style="text-align:center;margin-top:32px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;">
+    Click any widget above to open that section · Live rate auto-refreshes every 60s
+  </div>
+
+</div>
+</div>
+
+<!-- ─── TRADE FINANCE ─────────────────────────────────────────────────────── -->
+<div class="tab-page" id="tab-home-tf">
+<div class="page-content">
+
+  <!-- Page Hero -->
+  <div class="tf-hero">
+    <div class="tf-hero-bg"></div>
+    <div class="tf-hero-ov"></div>
+    <div class="tf-hero-ct">
+      <div class="tf-eyebrow">AIM Trade Finance Consultancy · Fund-Based &amp; Non Fund-Based</div>
+      <div class="tf-title">Trade Finance Products</div>
+      <div class="tf-subtitle">Select a category to explore financing options with worked examples, rates and comparisons</div>
+    </div>
+  </div>
+
+  <!-- ═══ 3 CATEGORY SELECTORS ═══════════════════════════════════════════ -->
+  <div class="cat-grid" id="cat-grid-main">
+
+    <div class="cat-card cat-export" onclick="selectCategory('export')">
+      <div class="cat-card-bg" style="background-image:url('https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=600&q=70&auto=format&fit=crop');"></div>
+      <div class="cat-card-ov"></div>
+      <div class="cat-card-ct">
+        <div class="cat-icon">📤</div>
+        <div class="cat-title">Export Finance</div>
+        <div class="cat-sub">Pre-shipment to post-shipment funding for Indian exporters</div>
+        <div class="cat-products">
+          <span class="cat-pill">Packing Credit INR</span>
+          <span class="cat-pill">PCFC</span>
+          <span class="cat-pill">FDBP / FDBC</span>
+          <span class="cat-pill">Export Factoring</span>
+          <span class="cat-pill">Export LC</span>
+          <span class="cat-pill">Bank Guarantee</span>
+          <span class="cat-pill">EPC</span>
+        </div>
+        <div class="cat-cta">Explore Export Finance →</div>
+      </div>
+    </div>
+
+    <div class="cat-card cat-import" onclick="selectCategory('import')">
+      <div class="cat-card-bg" style="background-image:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=70&auto=format&fit=crop');"></div>
+      <div class="cat-card-ov"></div>
+      <div class="cat-card-ct">
+        <div class="cat-icon">📥</div>
+        <div class="cat-title">Import Finance</div>
+        <div class="cat-sub">Funding and guarantees for Indian importers paying overseas suppliers</div>
+        <div class="cat-products">
+          <span class="cat-pill">Buyer's Credit</span>
+          <span class="cat-pill">Supplier's Credit</span>
+          <span class="cat-pill">Import LC</span>
+          <span class="cat-pill">Usance LC</span>
+          <span class="cat-pill">SBLC</span>
+          <span class="cat-pill">Import Factoring</span>
+        </div>
+        <div class="cat-cta">Explore Import Finance →</div>
+      </div>
+    </div>
+
+    <div class="cat-card cat-domestic" onclick="selectCategory('domestic')">
+      <div class="cat-card-bg" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=70&auto=format&fit=crop');"></div>
+      <div class="cat-card-ov"></div>
+      <div class="cat-card-ct">
+        <div class="cat-icon">🏭</div>
+        <div class="cat-title">Domestic Working Capital</div>
+        <div class="cat-sub">INR-based working capital facilities for domestic trade & manufacturing</div>
+        <div class="cat-products">
+          <span class="cat-pill">Cash Credit / OD</span>
+          <span class="cat-pill">Bill Discounting</span>
+          <span class="cat-pill">Invoice Financing</span>
+          <span class="cat-pill">Channel Finance</span>
+          <span class="cat-pill">Domestic BG</span>
+          <span class="cat-pill">WCDL</span>
+        </div>
+        <div class="cat-cta">Explore Working Capital →</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ DETAIL PANEL (shown after category click) ═══════════════════════ -->
+  <div id="tf-detail-panel" style="display:none;">
+    <div class="detail-nav">
+      <button class="back-btn" onclick="closeCategory()">← Back to Categories</button>
+      <span class="detail-nav-title" id="detail-nav-title"></span>
+    </div>
+    <div class="tf-filter-row" id="sub-filter-row">
+      <button class="tf-filter active" id="sub-all"     onclick="subFilter('all',this)">All Products</button>
+      <button class="tf-filter"        id="sub-fund"    onclick="subFilter('fund',this)">🏦 Fund-Based</button>
+      <button class="tf-filter"        id="sub-nonfund" onclick="subFilter('nonfund',this)">📋 Non Fund-Based</button>
+    </div>
+    <div class="tf-grid" id="tf-grid"></div>
+    <div class="dlabel" id="cmp-label">Quick Comparison</div>
+    <div class="tf-compare-wrap">
+      <div class="tf-compare-scroll">
+        <table class="tf-table" id="tf-cmp-table">
+          <thead><tr><th>Instrument</th><th>Type</th><th>Stage</th><th>Currency</th><th>Approx. Cost</th><th>Key Benefit</th><th>Key Risk</th></tr></thead>
+          <tbody id="tf-cmp-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ENQUIRY FORM ══════════════════════════════════════════════════════ -->
+  <div class="enq-section">
+    <div class="enq-wrap">
+      <div class="enq-left">
+        <div class="enq-eyebrow">Trade Finance Enquiry</div>
+        <div class="enq-title">Get Expert Guidance on Trade Finance</div>
+        <div class="enq-desc">Our trade finance specialists will help you identify the most cost-effective financing structure for your import/export requirements. Fill in your details and we'll get back within 24 hours.</div>
+        <div class="enq-promises">
+          <div class="enq-promise"><span class="ep-icon">⚡</span><span>Response within 24 hours</span></div>
+          <div class="enq-promise"><span class="ep-icon">🔒</span><span>Your details are confidential</span></div>
+          <div class="enq-promise"><span class="ep-icon">🎯</span><span>Personalised product recommendation</span></div>
+          <div class="enq-promise"><span class="ep-icon">💹</span><span>Best-rate benchmarking included</span></div>
+        </div>
+      </div>
+      <div class="enq-right">
+        <div id="enq-form-wrap">
+          <div class="enq-form-title">Tell Us About Your Requirement</div>
+          <div class="enq-fields">
+            <div class="enq-row">
+              <div class="enq-field">
+                <label class="enq-label">Full Name <span class="enq-req">*</span></label>
+                <div class="enq-input-wrap">
+                  <span class="enq-input-icon">👤</span>
+                  <input type="text" id="enq-name" class="enq-input" placeholder="Rajesh Kumar" maxlength="80"/>
+                </div>
+                <div class="enq-err" id="err-name"></div>
+              </div>
+              <div class="enq-field">
+                <label class="enq-label">Phone Number <span class="enq-req">*</span></label>
+                <div class="enq-input-wrap">
+                  <span class="enq-input-icon">📱</span>
+                  <input type="tel" id="enq-phone" class="enq-input" placeholder="+91 98765 43210" maxlength="15"/>
+                </div>
+                <div class="enq-err" id="err-phone"></div>
+              </div>
+            </div>
+            <div class="enq-field">
+              <label class="enq-label">Email Address <span class="enq-req">*</span></label>
+              <div class="enq-input-wrap">
+                <span class="enq-input-icon">✉️</span>
+                <input type="email" id="enq-email" class="enq-input" placeholder="rajesh@company.com" maxlength="100"/>
+              </div>
+              <div class="enq-err" id="err-email"></div>
+            </div>
+            <div class="enq-row">
+              <div class="enq-field">
+                <label class="enq-label">Company Name</label>
+                <div class="enq-input-wrap">
+                  <span class="enq-input-icon">🏢</span>
+                  <input type="text" id="enq-company" class="enq-input" placeholder="ABC Exports Pvt Ltd" maxlength="100"/>
+                </div>
+              </div>
+              <div class="enq-field">
+                <label class="enq-label">Business Type <span class="enq-req">*</span></label>
+                <div class="enq-select-wrap">
+                  <select id="enq-biz" class="enq-select">
+                    <option value="">Select…</option>
+                    <option value="exporter">Exporter</option>
+                    <option value="importer">Importer</option>
+                    <option value="both">Both Exporter & Importer</option>
+                    <option value="domestic">Domestic Trader / Manufacturer</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div class="enq-err" id="err-biz"></div>
+              </div>
+            </div>
+            <div class="enq-field">
+              <label class="enq-label">Finance Product of Interest</label>
+              <div class="enq-select-wrap">
+                <select id="enq-product" class="enq-select">
+                  <option value="">Select a product…</option>
+                  <optgroup label="Export Finance">
+                    <option>Packing Credit in INR</option>
+                    <option>Packing Credit in Foreign Currency (PCFC)</option>
+                    <option>Post-Shipment Credit / FDBP</option>
+                    <option>Export Factoring</option>
+                    <option>Export LC</option>
+                    <option>Bank Guarantee</option>
+                  </optgroup>
+                  <optgroup label="Import Finance">
+                    <option>Buyer's Credit</option>
+                    <option>Supplier's Credit</option>
+                    <option>Import LC (Sight / Usance)</option>
+                    <option>SBLC</option>
+                    <option>Import Factoring</option>
+                  </optgroup>
+                  <optgroup label="Domestic Working Capital">
+                    <option>Cash Credit / OD</option>
+                    <option>Bill Discounting</option>
+                    <option>Invoice Financing / TReDS</option>
+                    <option>Working Capital Demand Loan</option>
+                    <option>Channel Finance</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+            <div class="enq-field">
+              <label class="enq-label">Transaction Size (Approx.)</label>
+              <div class="enq-select-wrap">
+                <select id="enq-size" class="enq-select">
+                  <option value="">Select range…</option>
+                  <option>Under ₹50 Lakhs</option>
+                  <option>₹50L – ₹2 Crore</option>
+                  <option>₹2Cr – ₹10 Crore</option>
+                  <option>₹10Cr – ₹50 Crore</option>
+                  <option>Above ₹50 Crore</option>
+                </select>
+              </div>
+            </div>
+            <div class="enq-field">
+              <label class="enq-label">Message / Requirement Details</label>
+              <textarea id="enq-message" class="enq-textarea" placeholder="Briefly describe your requirement — e.g. 'I export garments to the US and need pre-shipment finance for a $200,000 order…'" maxlength="500" rows="3"></textarea>
+              <div class="enq-char-count"><span id="enq-char">0</span>/500</div>
+            </div>
+            <button class="enq-submit" onclick="submitEnquiry()">
+              <span id="enq-btn-txt">Submit Enquiry</span>
+              <span id="enq-btn-spin" style="display:none;" class="enq-spinner"></span>
+            </button>
+          </div>
+        </div>
+        <!-- Success state -->
+        <div id="enq-success" style="display:none;" class="enq-success-wrap">
+          <div class="enq-success-icon">✅</div>
+          <div class="enq-success-title">Enquiry Submitted!</div>
+          <div class="enq-success-msg">Thank you, <strong id="enq-success-name"></strong>. Our trade finance specialist will contact you at <strong id="enq-success-contact"></strong> within 24 hours.</div>
+          <button class="enq-reset-btn" onclick="resetEnquiry()">Submit Another Enquiry</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ─── LIVE RATES ──────────────────────────────────────────────────────── -->
+<div class="tab-page" id="tab-rates">
+<div class="page-content">
+
+  <div class="rate-hero">
+    <div class="rate-hero-bg"></div>
+    <div class="rate-hero-ov"></div>
+    <div class="rate-hero-wm">₹$</div>
+    <div class="rate-hero-ct">
+      <div class="rh-eyebrow">AIM Trade Finance · USD / INR Spot Rate</div>
+      <div class="rh-num"><span class="rh-sym">₹</span><span id="rh-rate">––.––</span></div>
+      <div class="rh-meta">
+        <span class="change-badge up" id="rh-change">● Live</span>
+        <div class="rh-stats">
+          <div class="rh-stat"><div class="sv" id="rh-hi">–</div><div class="sl">Day High</div></div>
+          <div class="rh-stat"><div class="sv" id="rh-lo">–</div><div class="sl">Day Low</div></div>
+          <div class="rh-stat"><div class="sv" id="rh-wk">–</div><div class="sl">7-Day Δ</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g4" style="margin-bottom:20px;">
+    <div class="rcard rc-gold"><div class="rc-lbl">Interbank Rate</div><div class="rc-val" id="rc-ib">–</div><div class="rc-sub">Mid-market</div></div>
+    <div class="rcard rc-teal"><div class="rc-lbl">Export Realisation</div><div class="rc-val" id="rc-exp">–</div><div class="rc-sub">~1.5% below mid</div></div>
+    <div class="rcard"><div class="rc-lbl">RBI Ref Rate</div><div class="rc-val" id="rc-rbi">–</div><div class="rc-sub">Approx. T-1</div></div>
+    <div class="rcard rc-grn"><div class="rc-lbl">Forward 3M</div><div class="rc-val" id="rc-fwd">–</div><div class="rc-sub">~1.5% ann. premium</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-hd">
+      <span class="chart-hd-ttl">USD/INR Rate History</span>
+      <div class="tabs">
+        <button class="tab active" onclick="loadChart(7,this)">7D</button>
+        <button class="tab" onclick="loadChart(30,this)">1M</button>
+        <button class="tab" onclick="loadChart(90,this)">3M</button>
+        <button class="tab" onclick="loadChart(180,this)">6M</button>
+      </div>
+    </div>
+    <canvas id="chart"></canvas>
+  </div>
+
+  <div class="sec-strip">
+    <div class="sec-strip-bg" style="background-image:url('https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?w=1200&q=70&auto=format&fit=crop');"></div>
+    <div class="sec-strip-ov"></div>
+    <div class="sec-strip-ct"><span class="ico">🏦</span><span class="ttl"><strong>Rate</strong> Comparison</span><div class="ln"></div></div>
+  </div>
+
+  <div class="g4">
+    <div class="src-card"><span class="src-nm">XE.com</span><span class="src-rt" id="s-xe">–</span></div>
+    <div class="src-card"><span class="src-nm">Google Finance</span><span class="src-rt" id="s-goog">–</span></div>
+    <div class="src-card"><span class="src-nm">Wise (mid)</span><span class="src-rt" id="s-wise">–</span></div>
+    <div class="src-card"><span class="src-nm">SBI TT Rate</span><span class="src-rt" id="s-sbi">–</span></div>
+  </div>
+
+  <div class="sec-strip" style="margin-top:28px;">
+    <div class="sec-strip-bg" style="background-image:url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=70&auto=format&fit=crop');"></div>
+    <div class="sec-strip-ov"></div>
+    <div class="sec-strip-ct"><span class="ico">🌍</span><span class="ttl"><strong>Cross</strong> Rates vs INR</span><div class="ln"></div></div>
+  </div>
+
+  <div class="g3" style="margin-bottom:16px;">
+    <div class="rcard rc-teal" style="border-left:3px solid var(--teal);">
+      <div class="rc-lbl">EUR / INR</div>
+      <div class="rc-val" id="cr-eurinr" style="color:var(--teal)">–</div>
+      <div class="rc-sub">Euro · 1 EUR in Rupees</div>
+    </div>
+    <div class="rcard rc-gold" style="border-left:3px solid var(--gold);">
+      <div class="rc-lbl">GBP / INR</div>
+      <div class="rc-val" id="cr-gbpinr" style="color:var(--gold)">–</div>
+      <div class="rc-sub">Pound Sterling · 1 GBP in Rupees</div>
+    </div>
+    <div class="rcard" style="border-left:3px solid var(--orange);">
+      <div class="rc-lbl">CNY / INR</div>
+      <div class="rc-val" id="cr-cnyinr" style="color:var(--orange)">–</div>
+      <div class="rc-sub">Chinese Yuan · 1 CNY in Rupees</div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="src-card"><span class="src-nm">USD / EUR</span><span class="src-rt" id="cr-usdeur" style="color:var(--teal)">–</span></div>
+    <div class="src-card"><span class="src-nm">USD / GBP</span><span class="src-rt" id="cr-usdgbp" style="color:var(--gold)">–</span></div>
+    <div class="src-card"><span class="src-nm">USD / CNY</span><span class="src-rt" id="cr-usdcny" style="color:var(--orange)">–</span></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ─── EXPORT CALCULATOR ──────────────────────────────────────────────── -->
+<div class="tab-page" id="tab-export">
+<div class="page-content">
+
+  <div class="sec-strip" style="margin-top:8px;">
+    <div class="sec-strip-bg" style="background-image:url('https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1200&q=70&auto=format&fit=crop');"></div>
+    <div class="sec-strip-ov"></div>
+    <div class="sec-strip-ct"><span class="ico">📤</span><span class="ttl"><strong>Exporter</strong> Realisation Calculator</span><div class="ln"></div></div>
+  </div>
+
+  <div class="calc-card exp-c">
+    <div class="cc-bg" style="background-image:url('https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=400&q=60&auto=format&fit=crop');"></div>
+    <div class="cc-title">📤 Exporter Realisation</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
+      <div class="fstack">
+        <div>
+          <div class="fl">Invoice Value</div>
+          <div class="ishell">
+            <input type="number" id="exp-invoice-usd" value="10000" oninput="calcExport()"/>
+            <select class="ccy-select" id="exp-ccy" onchange="calcExport()">
+              <option value="USD">USD</option>
+              <option value="GBP">GBP</option>
+              <option value="EUR">EUR</option>
+              <option value="CNY">CNY</option>
+            </select>
+          </div>
+          <div class="ccy-rate-hint">1 <span id="exp-ccy-code">USD</span> = <span id="exp-ccy-rate">–</span> INR</div>
+        </div>
+        <div class="slider-wrap">
+          <div class="fl">Bank Deduction <span class="ph" id="exp-paisa-display">100 Paisa</span></div>
+          <input type="range" id="exp-bank-paisa" min="0" max="150" step="5" value="100" oninput="syncPaisa('exp');calcExport()"/>
+          <div class="slider-ticks"><span>0p</span><span>50p</span><span>100p</span><span>150p</span></div>
+        </div>
+        <div>
+          <div class="fl">Freight Cost</div>
+          <div class="ishell"><input type="number" id="exp-freight" value="0" oninput="calcExport()"/><span class="utag" id="exp-frt-tag">USD</span></div>
+        </div>
+        <div>
+          <div class="fl">Export Incentive (RoDTEP / Drawback)</div>
+          <div class="ishell"><input type="number" id="exp-incentive-pct" value="0" step="0.1" oninput="calcExport()"/><span class="utag">%</span></div>
+        </div>
+        <div>
+          <div class="fl">Production / COGS Cost</div>
+          <div class="ishell"><input type="number" id="exp-cost-inr" value="750000" oninput="calcExport()"/><span class="utag">INR</span></div>
+        </div>
+      </div>
+      <div class="fstack">
+        <div class="bk">
+          <div class="bk-r"><span>Gross Realisation</span><span id="exp-gross">–</span></div>
+          <div class="bk-r bd"><span>− Bank Deduction</span><span id="exp-bank-cut">–</span></div>
+          <div class="bk-r bd"><span>− Freight (INR)</span><span id="exp-freight-inr">–</span></div>
+          <div class="bk-r ba"><span>+ Export Incentive</span><span id="exp-incentive-inr">–</span></div>
+          <div class="bk-sep"></div>
+          <div class="bk-r bt"><span>Net INR Realised</span><span id="exp-result-val">–</span></div>
+        </div>
+        <div class="pnl-r"><span class="pnl-l">Profit / Loss</span><span class="pnl-v" id="exp-pnl">–</span></div>
+        <div class="c" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.7;padding:14px 16px;">
+          Active Rate: <span id="exp-active-rate" style="color:var(--gold);">–</span><br/>
+          Effective Rate (after deduction): <span id="exp-eff-rate" style="color:var(--text2);">–</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ─── IMPORT CALCULATOR ──────────────────────────────────────────────── -->
+<div class="tab-page" id="tab-import">
+<div class="page-content">
+
+  <div class="sec-strip" style="margin-top:8px;">
+    <div class="sec-strip-bg" style="background-image:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=70&auto=format&fit=crop');"></div>
+    <div class="sec-strip-ov"></div>
+    <div class="sec-strip-ct"><span class="ico">📥</span><span class="ttl"><strong>Importer</strong> Cost Calculator</span><div class="ln"></div></div>
+  </div>
+
+  <div class="calc-card imp-c">
+    <div class="cc-bg" style="background-image:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&q=60&auto=format&fit=crop');"></div>
+    <div class="cc-title">📥 Importer Cost Calculator</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
+      <div class="fstack">
+        <div>
+          <div class="fl">Import Invoice Value</div>
+          <div class="ishell">
+            <input type="number" id="imp-invoice-usd" value="10000" oninput="calcImport()"/>
+            <select class="ccy-select" id="imp-ccy" onchange="calcImport()">
+              <option value="USD">USD</option>
+              <option value="GBP">GBP</option>
+              <option value="EUR">EUR</option>
+              <option value="CNY">CNY</option>
+            </select>
+          </div>
+          <div class="ccy-rate-hint">1 <span id="imp-ccy-code">USD</span> = <span id="imp-ccy-rate">–</span> INR</div>
+        </div>
+        <div class="slider-wrap">
+          <div class="fl">Bank Markup <span class="ph" id="imp-paisa-display">100 Paisa</span></div>
+          <input type="range" id="imp-bank-paisa" min="0" max="150" step="5" value="100" oninput="syncPaisa('imp');calcImport()"/>
+          <div class="slider-ticks"><span>0p</span><span>50p</span><span>100p</span><span>150p</span></div>
+        </div>
+        <div>
+          <div class="fl">Freight Cost</div>
+          <div class="ishell"><input type="number" id="imp-freight" value="0" oninput="calcImport()"/><span class="utag" id="imp-frt-tag">USD</span></div>
+        </div>
+        <div>
+          <div class="fl">Customs Duty</div>
+          <div class="ishell"><input type="number" id="imp-duty" value="10" step="0.5" oninput="calcImport()"/><span class="utag">%</span></div>
+        </div>
+        <div>
+          <div class="fl">Your Selling Price</div>
+          <div class="ishell"><input type="number" id="imp-sell-inr" value="1000000" oninput="calcImport()"/><span class="utag">INR</span></div>
+        </div>
+      </div>
+      <div class="fstack">
+        <div class="bk">
+          <div class="bk-r"><span>Base INR Cost</span><span id="imp-base-inr">–</span></div>
+          <div class="bk-r ba"><span>+ Bank Markup</span><span id="imp-bank-add">–</span></div>
+          <div class="bk-r ba"><span>+ Freight (INR)</span><span id="imp-freight-inr">–</span></div>
+          <div class="bk-r ba"><span>+ Customs Duty</span><span id="imp-duty-inr">–</span></div>
+          <div class="bk-sep"></div>
+          <div class="bk-r bt"><span>Total Landed Cost</span><span id="imp-result-val">–</span></div>
+        </div>
+        <div class="pnl-r"><span class="pnl-l">Gross Margin</span><span class="pnl-v" id="imp-pnl">–</span></div>
+        <div class="c" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.7;padding:14px 16px;">
+          Active Rate: <span id="imp-active-rate" style="color:var(--teal);">–</span><br/>
+          Effective Rate (after markup): <span id="imp-eff-rate" style="color:var(--text2);">–</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ─── OIL IMPACT ─────────────────────────────────────────────────────── -->
+<div class="tab-page" id="tab-oil">
+<div class="page-content">
+
+  <div class="sec-strip" style="margin-top:8px;">
+    <div class="sec-strip-bg" style="background-image:url('https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1200&q=70&auto=format&fit=crop');"></div>
+    <div class="sec-strip-ov"></div>
+    <div class="sec-strip-ct"><span class="ico">🛢️</span><span class="ttl"><strong>Brent Crude</strong> vs INR Impact</span><div class="ln"></div></div>
+  </div>
+
+  <div class="oil-card">
+    <div class="oil-bg"></div>
+    <div class="oil-title">🛢 Brent Crude → USD/INR Scenario Modeller</div>
+    <div class="oil-grid">
+      <div class="fstack">
+        <div>
+          <div class="fl">Current Brent Price</div>
+          <div class="ishell" style="background:var(--surface);border:1px solid var(--border);"><input type="number" id="oil-current" value="80" step="1" oninput="calcOil()" style="flex:1;background:transparent;border:none;outline:none;font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--text);padding:10px 13px;"/><span class="utag">USD/bbl</span></div>
+        </div>
+        <div>
+          <div class="fl">Scenario / Projected Brent</div>
+          <div class="ishell" style="background:var(--surface);border:1px solid var(--border);"><input type="number" id="oil-projected" value="85" step="1" oninput="calcOil()" style="flex:1;background:transparent;border:none;outline:none;font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--text);padding:10px 13px;"/><span class="utag">USD/bbl</span></div>
+        </div>
+        <div class="oil-insight" id="oil-insight-text">Enter current and projected Brent prices to model the INR impact.</div>
+        <div class="c" style="padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;">
+          Rule: <span style="color:var(--orange);">$1 Brent rise → 28 paisa INR depreciation</span><br/>
+          India imports ~85% of crude oil needs<br/>
+          Higher oil = wider current account deficit = weaker INR
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="os neutral"><span class="ol">Oil Price Change</span><span class="ov" id="oil-delta">–</span></div>
+        <div class="os" id="oil-depr-stat"><span class="ol">Est. INR Move (Paisa)</span><span class="ov" id="oil-depr-pct">–</span></div>
+        <div class="os" id="oil-rate-stat"><span class="ol">Projected USD/INR</span><span class="ov" id="oil-proj-rate">–</span></div>
+        <div class="gauge-wrap">
+          <div class="gauge-l">Depreciation Pressure</div>
+          <div class="gauge-track"><div class="gauge-fill" id="oil-gauge-fill" style="width:0%;background:var(--orange);"></div></div>
+          <div class="gauge-scale"><span>Neutral</span><span>Moderate</span><span>High</span></div>
+        </div>
+        <div class="os"><span class="ol">Rule of Thumb</span><span class="ov" style="color:var(--orange);font-size:12px;">$1 oil ↑ ≈ 28p INR ↓</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ─── RATE OVERRIDE ──────────────────────────────────────────────────── -->
+<div class="tab-page" id="tab-rate-override">
+<div class="page-content">
+
+  <div class="sec-strip" style="margin-top:8px;">
+    <div class="sec-strip-bg" style="background-image:url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=70&auto=format&fit=crop');"></div>
+    <div class="sec-strip-ov"></div>
+    <div class="sec-strip-ct"><span class="ico">⚙️</span><span class="ttl"><strong>Manual</strong> Interbank Rate Override</span><div class="ln"></div></div>
+  </div>
+
+  <div class="manual-card">
+    <div class="mc-hd">
+      <div class="mc-title-row">
+        <span class="mc-title">⚙ Manual Interbank Rate</span>
+        <span id="rate-source-badge" class="rbadge rbadge-live">● Live Rate</span>
+      </div>
+      <button class="clear-btn" onclick="clearManualRate()">✕ Reset to Live</button>
+    </div>
+    <div class="mc-body">
+      <div>
+        <div class="mi-label">Enter your rate (₹ per USD)</div>
+        <div class="big-shell">
+          <span class="big-sym">₹</span>
+          <input type="number" id="manual-rate" class="big-input" placeholder="84.5025" step="0.0001" oninput="applyManualRate()"/>
+        </div>
+        <div class="mi-hint">
+          Type any interbank / RBI reference rate.<br/>
+          All calculators update instantly.<br/>
+          Supports up to 4 decimal places.<br/>
+          Leave blank to use the live feed.
+        </div>
+      </div>
+      <div class="cmp-cards">
+        <div class="cmp-c"><span class="cmp-l">Live Fetched Rate</span><span class="cmp-v" id="rc-live-val">Fetching…</span></div>
+        <div class="cmp-c cmp-active"><span class="cmp-l">Active Rate (in use)</span><span class="cmp-v" id="rc-active-val" style="color:var(--gold)">–</span></div>
+        <div class="cmp-c"><span class="cmp-l">Difference</span><span class="cmp-v" id="rc-diff-val" style="font-size:16px;color:var(--muted)">–</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick guide -->
+  <div class="c" style="margin-top:16px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">How the Rate Override Works</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);margin-bottom:6px;">📡 Live Mode</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7;">Rates are fetched from open.er-api.com every 60 seconds. All calculators use this automatically.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);margin-bottom:6px;">✎ Manual Mode</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7;">Enter your bank / RBI rate to model exact realisation. Supports 4 decimal places like 84.5025.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);margin-bottom:6px;">🔄 Reset</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7;">Click "Reset to Live" to clear the manual rate and revert to the auto-fetched live feed.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+</div><!-- /page-shell -->
+
+<footer>
+  <div class="ft"><strong style="color:var(--gold);letter-spacing:1px;">AIM TRADE FINANCE CONSULTANCY</strong> · aimtfc.in<br/>Data via frankfurter.app · Rates indicative · Auto-refresh 60s · Oil impact is macroeconomic approximation · Not financial advice · For trade reference only</div>
+  <div class="ft-logo">AIM</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+'use strict';
+
+// ── STATE ──────────────────────────────────────────────────────────────────
+let currentRate = null, prevRate = null, manualRate = null, chartInstance = null;
+
+const fmt    = (n,d=2) => (n!=null&&!isNaN(n)) ? parseFloat(n).toFixed(d) : '–';
+const inrFmt = n => '₹'+fmt(n,0).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+const getRate = () => manualRate !== null ? manualRate : (currentRate||84);
+
+// ── NAV ────────────────────────────────────────────────────────────────────
+function showTab(name) {
+  document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelector(`[data-tab="${name}"]`).classList.add('active');
+  // close mobile menu
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ── FETCH RATE ─────────────────────────────────────────────────────────────
+let rateEURINR = null, rateGBPINR = null, rateCNYINR = null;
+let rateUSDEUR = null, rateUSDGBP = null, rateUSDCNY = null;
+
+// Fallback rates (approximate – used only if all APIs fail)
+const FALLBACK = { INR:84.50, EUR:0.9210, GBP:0.7890, CNY:7.2450 };
+
+function applyRates(rates) {
+  prevRate    = currentRate;
+  currentRate = rates.INR;
+  rateUSDEUR  = rates.EUR;
+  rateUSDGBP  = rates.GBP;
+  rateUSDCNY  = rates.CNY;
+  rateEURINR  = rates.INR / rates.EUR;
+  rateGBPINR  = rates.INR / rates.GBP;
+  rateCNYINR  = rates.INR / rates.CNY;
+  updateUI(currentRate);
+  updateCrossRates();
+}
+
+async function fetchRate() {
+  // ── Primary: frankfurter.app (free, CORS-open, no key needed) ──
+  try {
+    const res  = await fetch('https://api.frankfurter.app/latest?from=USD&to=INR,EUR,GBP,CNY');
+    if (!res.ok) throw new Error('frankfurter ' + res.status);
+    const data = await res.json();
+    if (!data.rates || !data.rates.INR) throw new Error('no INR');
+    applyRates(data.rates);
+    setApiStatus('live');
+    return;
+  } catch(e) { /* fall through */ }
+
+  // ── Secondary: exchangerate.host (free, CORS-open) ──
+  try {
+    const res  = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=INR,EUR,GBP,CNY');
+    if (!res.ok) throw new Error('erhost ' + res.status);
+    const data = await res.json();
+    if (!data.rates || !data.rates.INR) throw new Error('no INR');
+    applyRates(data.rates);
+    setApiStatus('live');
+    return;
+  } catch(e) { /* fall through */ }
+
+  // ── Tertiary: open.er-api.com ──
+  try {
+    const res  = await fetch('https://open.er-api.com/v6/latest/USD');
+    if (!res.ok) throw new Error('er-api ' + res.status);
+    const data = await res.json();
+    if (data.result !== 'success') throw new Error('er-api fail');
+    applyRates(data.rates);
+    setApiStatus('live');
+    return;
+  } catch(e) { /* fall through */ }
+
+  // ── Fallback: static indicative rates ──
+  applyRates(FALLBACK);
+  setApiStatus('fallback');
+}
+
+function setApiStatus(mode) {
+  const pill = document.querySelector('.live-pill');
+  if (!pill) return;
+  if (mode === 'fallback') {
+    pill.innerHTML = '<div class="pulse-dot" style="background:var(--orange)"></div><span style="color:var(--orange);font-family:\'IBM Plex Mono\',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;">Indicative</span>';
+  } else {
+    pill.innerHTML = '<div class="pulse-dot"></div>Live';
+  }
+}
+
+function updateCrossRates() {
+  const pairs = [
+    ['cr-eurinr', rateEURINR, 4],
+    ['cr-gbpinr', rateGBPINR, 4],
+    ['cr-cnyinr', rateCNYINR, 4],
+    ['cr-usdeur', rateUSDEUR, 4],
+    ['cr-usdgbp', rateUSDGBP, 4],
+    ['cr-usdcny', rateUSDCNY, 4],
+  ];
+  pairs.forEach(([id, val, dp]) => {
+    const el = document.getElementById(id);
+    if (el && val) el.textContent = fmt(val, dp);
+  });
+  // ticker cross rates
+  const tPairs = [
+    ['t-eurinr','t-eurinr2', rateEURINR],
+    ['t-gbpinr','t-gbpinr2', rateGBPINR],
+    ['t-cnyinr','t-cnyinr2', rateCNYINR],
+  ];
+  tPairs.forEach(([id1, id2, val]) => {
+    if (val) {
+      [id1, id2].forEach(id => { const el=document.getElementById(id); if(el) el.textContent='₹'+fmt(val,4); });
+    }
+  });
+}
+
+function updateUI(rate) {
+  const f4 = fmt(rate,4);
+
+  // nav chip
+  document.getElementById('nav-rate').textContent = f4;
+
+  // home hero
+  document.getElementById('hn-rate').textContent = f4;
+
+  // rates page
+  document.getElementById('rh-rate').textContent = f4;
+  document.getElementById('rh-hi').textContent = '₹'+fmt(rate*1.003,4);
+  document.getElementById('rh-lo').textContent = '₹'+fmt(rate*0.997,4);
+  document.getElementById('rc-ib').textContent  = '₹'+f4;
+  document.getElementById('rc-exp').textContent = '₹'+fmt(rate*0.985,4);
+  document.getElementById('rc-rbi').textContent = '₹'+fmt(rate*0.999,4);
+  document.getElementById('rc-fwd').textContent = '₹'+fmt(rate*1.00375,4);
+  document.getElementById('s-xe').textContent   = '₹'+fmt(rate+0.02,4);
+  document.getElementById('s-goog').textContent = '₹'+fmt(rate+0.01,4);
+  document.getElementById('s-wise').textContent = '₹'+f4;
+  document.getElementById('s-sbi').textContent  = '₹'+fmt(rate*0.982,4);
+
+  // ticker
+  ['t-usdinr','t-usdinr2'].forEach(id => document.getElementById(id).textContent = '₹'+f4);
+  ['t-ib','t-ib2'].forEach(id => document.getElementById(id).textContent = '₹'+f4);
+  ['t-fwd','t-fwd2'].forEach(id => document.getElementById(id).textContent = '₹'+fmt(rate*1.00375,4));
+  ['t-rbi','t-rbi2'].forEach(id => document.getElementById(id).textContent = '₹'+fmt(rate*0.999,4));
+  ['t-exp','t-exp2'].forEach(id => document.getElementById(id).textContent = '₹'+fmt(rate*0.985,4));
+
+  // change pill
+  if (prevRate) {
+    const d = rate-prevRate, p = (d/prevRate*100).toFixed(3);
+    const txt = (d>=0?'▲ +':'▼ ')+fmt(Math.abs(d),4)+' ('+Math.abs(p)+'%)';
+    const cls = 'change-badge '+(d>=0?'up':'down');
+    ['rh-change'].forEach(id => { const el=document.getElementById(id); if(el){el.textContent=txt;el.className=cls;} });
+    const hn = document.getElementById('hn-change');
+    if(hn){ hn.textContent=txt; hn.className='hn-change '+(d>=0?'up':'down'); }
+  }
+
+  const now = new Date();
+  const ts = 'Updated '+now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  ['hn-updated'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=ts;});
+
+  // week change placeholder
+  const wkEl = document.getElementById('rh-wk');
+  if(wkEl && wkEl.textContent==='–') wkEl.textContent='See chart';
+
+  calcExport(); calcImport(); calcOil(); updateRateCompare(); updateCcyHints();
+  updateHomeDashboard(rate);
+}
+
+// ── MANUAL RATE ────────────────────────────────────────────────────────────
+function updateRateCompare() {
+  const live = currentRate||84, active = getRate(), diff = active-live;
+  const lv = document.getElementById('rc-live-val');
+  const av = document.getElementById('rc-active-val');
+  const dv = document.getElementById('rc-diff-val');
+  if(lv) lv.textContent = '₹'+fmt(live,4);
+  if(av) av.textContent = '₹'+fmt(active,4);
+  if(dv) {
+    if(manualRate===null){ dv.textContent='–'; dv.style.color='var(--muted)'; }
+    else {
+      dv.textContent=(diff>=0?'+':'')+fmt(diff,4)+' ('+(diff>=0?'+':'')+fmt((diff/live)*100,3)+'%)';
+      dv.style.color=diff>0?'var(--red)':diff<0?'var(--green2)':'var(--muted)';
+    }
+  }
+}
+
+function applyManualRate() {
+  const v = parseFloat(document.getElementById('manual-rate').value);
+  if(!isNaN(v)&&v>0){
+    manualRate=parseFloat(v.toFixed(4));
+    document.getElementById('rate-source-badge').textContent='✎ Manual Rate';
+    document.getElementById('rate-source-badge').className='rbadge rbadge-manual';
+  } else {
+    manualRate=null;
+    document.getElementById('rate-source-badge').textContent='● Live Rate';
+    document.getElementById('rate-source-badge').className='rbadge rbadge-live';
+  }
+  updateRateCompare(); calcExport(); calcImport(); calcOil();
+}
+
+function clearManualRate() {
+  document.getElementById('manual-rate').value='';
+  manualRate=null;
+  document.getElementById('rate-source-badge').textContent='● Live Rate';
+  document.getElementById('rate-source-badge').className='rbadge rbadge-live';
+  updateRateCompare(); calcExport(); calcImport(); calcOil();
+}
+
+// ── PAISA SYNC ─────────────────────────────────────────────────────────────
+function syncPaisa(p) {
+  document.getElementById(p+'-paisa-display').textContent =
+    document.getElementById(p+'-bank-paisa').value+' Paisa';
+}
+
+// ── CURRENCY RATE HELPER ───────────────────────────────────────────────────
+function getCcyRate(ccy) {
+  const base = getRate(); // USD/INR
+  if (ccy === 'USD') return base;
+  if (ccy === 'GBP') return rateGBPINR || (base / (rateUSDGBP||0.789));
+  if (ccy === 'EUR') return rateEURINR || (base / (rateUSDEUR||0.921));
+  if (ccy === 'CNY') return rateCNYINR || (base / (rateUSDCNY||7.245));
+  return base;
+}
+
+function updateCcyHints() {
+  const expCcy = document.getElementById('exp-ccy')?.value || 'USD';
+  const impCcy = document.getElementById('imp-ccy')?.value || 'USD';
+  const ec = document.getElementById('exp-ccy-code'); if(ec) ec.textContent = expCcy;
+  const er = document.getElementById('exp-ccy-rate'); if(er) er.textContent = '₹'+fmt(getCcyRate(expCcy),4);
+  const ic = document.getElementById('imp-ccy-code'); if(ic) ic.textContent = impCcy;
+  const ir = document.getElementById('imp-ccy-rate'); if(ir) ir.textContent = '₹'+fmt(getCcyRate(impCcy),4);
+  const eft = document.getElementById('exp-frt-tag'); if(eft) eft.textContent = expCcy;
+  const ift = document.getElementById('imp-frt-tag'); if(ift) ift.textContent = impCcy;
+}
+
+// ── EXPORTER ───────────────────────────────────────────────────────────────
+function calcExport() {
+  const ccy = document.getElementById('exp-ccy')?.value || 'USD';
+  const rate = getCcyRate(ccy);
+  updateCcyHints();
+  const usd=parseFloat(document.getElementById('exp-invoice-usd').value)||0;
+  const paisa=parseFloat(document.getElementById('exp-bank-paisa').value)||0;
+  const frt=parseFloat(document.getElementById('exp-freight').value)||0;
+  const inc=parseFloat(document.getElementById('exp-incentive-pct').value)||0;
+  const cost=parseFloat(document.getElementById('exp-cost-inr').value)||0;
+  const er=rate-(paisa/100);
+  const gross=usd*rate, bcut=usd*(paisa/100), fInr=frt*er, iInr=(usd*er)*(inc/100);
+  const net=(usd*er)-fInr+iInr, pnl=net-cost;
+  document.getElementById('exp-gross').textContent=inrFmt(gross);
+  document.getElementById('exp-bank-cut').textContent=inrFmt(bcut);
+  document.getElementById('exp-freight-inr').textContent=inrFmt(fInr);
+  document.getElementById('exp-incentive-inr').textContent=inrFmt(iInr);
+  document.getElementById('exp-result-val').textContent=inrFmt(net);
+  const pe=document.getElementById('exp-pnl');
+  pe.textContent=(pnl>=0?'+':'')+inrFmt(pnl);
+  pe.style.color=pnl>=0?'var(--green2)':'var(--red)';
+  const ar=document.getElementById('exp-active-rate'); if(ar) ar.textContent='₹'+fmt(rate,4)+' / '+ccy;
+  const efr=document.getElementById('exp-eff-rate'); if(efr) efr.textContent='₹'+fmt(er,4)+' / '+ccy;
+}
+
+// ── IMPORTER ───────────────────────────────────────────────────────────────
+function calcImport() {
+  const ccy = document.getElementById('imp-ccy')?.value || 'USD';
+  const rate = getCcyRate(ccy);
+  updateCcyHints();
+  const usd=parseFloat(document.getElementById('imp-invoice-usd').value)||0;
+  const paisa=parseFloat(document.getElementById('imp-bank-paisa').value)||0;
+  const frt=parseFloat(document.getElementById('imp-freight').value)||0;
+  const duty=parseFloat(document.getElementById('imp-duty').value)||0;
+  const sell=parseFloat(document.getElementById('imp-sell-inr').value)||0;
+  const er=rate+(paisa/100);
+  const base=usd*rate, badd=usd*(paisa/100), fInr=frt*er, dInr=((usd*er)+fInr)*(duty/100);
+  const tot=(usd*er)+fInr+dInr, margin=sell-tot;
+  document.getElementById('imp-base-inr').textContent=inrFmt(base);
+  document.getElementById('imp-bank-add').textContent=inrFmt(badd);
+  document.getElementById('imp-freight-inr').textContent=inrFmt(fInr);
+  document.getElementById('imp-duty-inr').textContent=inrFmt(dInr);
+  document.getElementById('imp-result-val').textContent=inrFmt(tot);
+  const pe=document.getElementById('imp-pnl');
+  pe.textContent=(margin>=0?'+':'')+inrFmt(margin);
+  pe.style.color=margin>=0?'var(--green2)':'var(--red)';
+  const ar=document.getElementById('imp-active-rate'); if(ar) ar.textContent='₹'+fmt(rate,4)+' / '+ccy;
+  const efr=document.getElementById('imp-eff-rate'); if(efr) efr.textContent='₹'+fmt(er,4)+' / '+ccy;
+}
+
+// ── OIL ────────────────────────────────────────────────────────────────────
+function calcOil() {
+  const now=parseFloat(document.getElementById('oil-current').value);
+  const proj=parseFloat(document.getElementById('oil-projected').value);
+  const rate=getRate();
+  if(isNaN(now)||isNaN(proj)) return;
+  const delta=proj-now, paisa=delta*28, pRate=rate+(paisa/100), pct=((pRate-rate)/rate)*100;
+  document.getElementById('oil-delta').textContent=(delta>=0?'+':'')+fmt(delta,2)+' USD/bbl';
+  document.getElementById('oil-depr-pct').textContent=(paisa>=0?'+':'')+fmt(paisa,1)+' paisa';
+  document.getElementById('oil-depr-stat').className='os '+(pct>2?'warn':pct<0?'good':'neutral');
+  document.getElementById('oil-proj-rate').textContent='₹'+fmt(pRate,4);
+  document.getElementById('oil-rate-stat').className='os '+(pRate>rate?'warn':pRate<rate?'good':'neutral');
+  const gp=Math.min(Math.max((pct/10)*100,0),100);
+  const fill=document.getElementById('oil-gauge-fill');
+  fill.style.width=gp+'%';
+  fill.style.background=pct>5?'var(--red)':pct>2?'var(--orange)':pct<0?'var(--green2)':'#f9a825';
+  const ins=document.getElementById('oil-insight-text');
+  if(delta===0) ins.innerHTML='<strong>No Change —</strong> Oil steady. USD/INR near current levels.';
+  else if(delta>0) ins.innerHTML=`<strong>Bearish for INR —</strong> +$${fmt(delta,2)}/bbl Brent rise. At <strong>28 paisa/$1</strong>, INR weakens <strong>${fmt(Math.abs(paisa),1)} paisa</strong> → USD/INR <strong>₹${fmt(pRate,4)}</strong>. Consider forward cover.`;
+  else ins.innerHTML=`<strong>Supportive for INR —</strong> $${fmt(Math.abs(delta),2)}/bbl fall. At <strong>28 paisa/$1</strong>, INR firms <strong>${fmt(Math.abs(paisa),1)} paisa</strong> → USD/INR <strong>₹${fmt(pRate,4)}</strong>.`;
+}
+
+// ── CHART ──────────────────────────────────────────────────────────────────
+async function loadChart(days, btn) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  // frankfurter.app historical (free, CORS-open)
+  try {
+    const end=new Date(), start=new Date();
+    start.setDate(start.getDate()-days);
+    const s=start.toISOString().split('T')[0], e=end.toISOString().split('T')[0];
+    const res=await fetch(`https://api.frankfurter.app/${s}..${e}?from=USD&to=INR`);
+    if(!res.ok) throw new Error();
+    const data=await res.json();
+    if(!data.rates) throw new Error();
+    const labels=Object.keys(data.rates).sort();
+    const values=labels.map(d=>data.rates[d].INR);
+    if(labels.length>7){
+      const diff=((values.at(-1)-values.at(-8))/values.at(-8)*100).toFixed(2);
+      document.getElementById('rh-wk').textContent=(diff>=0?'+':'')+diff+'%';
+    }
+    drawChart(labels,values);
+    return;
+  } catch(e) { /* fall through */ }
+
+  // Fallback: simulate from current rate
+  if(currentRate) simChart(days);
+}
+
+function simChart(days) {
+  const rate=currentRate||84, labels=[], values=[], now=new Date();
+  for(let i=days;i>=0;i--){
+    const d=new Date(now); d.setDate(d.getDate()-i);
+    if(d.getDay()===0||d.getDay()===6) continue;
+    labels.push(d.toISOString().split('T')[0]);
+    values.push(parseFloat((rate+(Math.random()-0.5)*0.6-(i/days)*(Math.random()>0.5?0.4:-0.4)).toFixed(4)));
+  }
+  drawChart(labels,values);
+}
+
+function drawChart(labels,values) {
+  const ctx=document.getElementById('chart').getContext('2d');
+  if(chartInstance) chartInstance.destroy();
+  const grad=ctx.createLinearGradient(0,0,0,200);
+  grad.addColorStop(0,'rgba(201,168,76,0.2)'); grad.addColorStop(1,'rgba(201,168,76,0)');
+  chartInstance=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{data:values,borderColor:'#c9a84c',borderWidth:2,backgroundColor:grad,fill:true,tension:0.35,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#c9a84c'}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#111827',borderColor:'#1e2d45',borderWidth:1,titleColor:'#4a5a78',bodyColor:'#c9a84c',titleFont:{family:'IBM Plex Mono',size:10},bodyFont:{family:'IBM Plex Mono',size:13},callbacks:{label:c=>'₹ '+c.parsed.y.toFixed(4)}}},
+      scales:{
+        x:{grid:{color:'rgba(30,45,69,0.6)'},ticks:{color:'#4a5a78',font:{family:'IBM Plex Mono',size:9},maxTicksLimit:6,maxRotation:0}},
+        y:{min:Math.min(...values)*0.999,max:Math.max(...values)*1.001,grid:{color:'rgba(30,45,69,0.6)'},ticks:{color:'#4a5a78',font:{family:'IBM Plex Mono',size:9},callback:v=>'₹'+v.toFixed(2)}}
+      }
+    }
+  });
+}
+
+// ── TRADE FINANCE DATA ─────────────────────────────────────────────────────
+const TF_PRODUCTS = {
+
+  export: [
+    // ── FUND-BASED ──────────────────────────────────────────────────────────
+    { type:'fund', stripe:'exp-stripe', instrument:'Packing Credit in INR (Pre-Shipment)', tags:['tag-exp:Exporter','tag-fund:Fund-Based','tag-pre:Pre-Shipment'], rate:'~8–9% p.a.',
+      desc:'Short-term working capital loan sanctioned against a confirmed export order or LC. Funds procurement, manufacturing and packing of goods before shipment.',
+      pros:['Concessional rate — typically 1–2% below normal WC limit','No asset liquidation needed; funded against confirmed order','Available up to 270 days pre-shipment','Eligible for ECGC credit insurance cover'],
+      cons:['Full forex risk on the exporter; INR loan repaid from USD proceeds','Must be liquidated within stipulated period or penal interest applies','Requires confirmed order or LC as security'],
+      ex:{ title:'Worked Example — $100,000 Export Order', scenario:'Exporter receives order for <strong>$100,000</strong>. USD/INR = <strong>84.50</strong>.',
+        rows:[['Packing Credit sanctioned (80% of order)','₹67,60,000'],['Tenure','180 days'],['Interest @ 8.5% p.a. for 180 days','−₹2,87,300'],['Net funds available for production','₹64,72,700']],
+        note:'On shipment & realisation of ₹84,50,000, net = ₹84,50,000 − ₹67,60,000 (principal) − ₹2,87,300 (interest) − production cost.' }},
+
+    { type:'fund', stripe:'exp-stripe', instrument:'Packing Credit in Foreign Currency (PCFC)', tags:['tag-exp:Exporter','tag-fund:Fund-Based','tag-pre:Pre-Shipment'], rate:'SOFR + ~1.5%',
+      desc:'Same as INR Packing Credit but disbursed in USD/EUR. The exporter borrows foreign currency and repays from export proceeds — natural hedge eliminating forex risk on the borrowing.',
+      pros:['Low cost — SOFR-linked rates often 3–5% cheaper than INR PCFC','Natural hedge: borrow USD, repay USD from proceeds','Saves ₹50,000–₹1,00,000+ annually per ₹1Cr drawdown vs INR'],
+      cons:['If order falls through, forex risk on USD repayment shifts to exporter','Requires RBI-compliant end-use documentation','Rate fluctuates with SOFR movements'],
+      ex:{ title:'PCFC vs INR PCFC — Savings Comparison', scenario:'Same $100,000 order. PCFC rate = SOFR 5.3% + 1.5% = <strong>6.8% p.a. (180 days)</strong>.',
+        rows:[['PCFC sanctioned (USD)','$80,000'],['Interest @ 6.8% / 180 days','−$2,720'],['INR PCFC interest (8.5% / ₹67.6L)','−₹2,87,300'],['Annual saving vs INR PCFC','≈ ₹57,000–₹80,000']],
+        note:'PCFC preferred when SOFR + spread is meaningfully below Indian PLR — typically saves 2–4% p.a. on pre-shipment borrowing.' }},
+
+    { type:'fund', stripe:'exp-stripe', instrument:'Post-Shipment Credit / FDBP / FDBC', tags:['tag-exp:Exporter','tag-fund:Fund-Based','tag-post:Post-Shipment'], rate:'~8–9% p.a.',
+      desc:'After shipment, the exporter submits documents to the bank. Bank purchases bills (FDBP) or advances against them (FDBC), giving instant INR liquidity while the buyer has credit days.',
+      pros:['Immediate liquidity after shipment — no waiting 30–90 days','Automatically liquidates any PCFC outstanding','Under FDBP, bank assumes collection risk (non-recourse)'],
+      cons:['Under FDBC: recourse to exporter if buyer defaults','Exchange rate crystallised at time of purchase','Document discrepancy can delay advance'],
+      ex:{ title:'FDBP Example — $100,000 with 60-day credit', scenario:'Exporter ships $100,000. Buyer has 60-day credit. USD/INR = <strong>84.50</strong>.',
+        rows:[['Bill amount','$100,000'],['Bank purchases at TT rate (−100 paisa)','₹84,49,000'],['Interest @ 8.5% for 60 days','−₹1,17,900'],['Net INR to exporter immediately','₹83,31,100']],
+        note:'Exporter gets ₹83.3L today instead of waiting 60 days for buyer payment. Cost of early realisation = ₹1.18L interest.' }},
+
+    { type:'fund', stripe:'exp-stripe', instrument:'Export Factoring', tags:['tag-exp:Exporter','tag-fund:Fund-Based','tag-post:Post-Shipment'], rate:'1–3% of invoice',
+      desc:'Exporter sells its receivables (export invoices) to a factoring company at a discount. Factor advances 80–90% immediately and remits balance on buyer payment, after deducting the fee. Factor handles collections.',
+      pros:['No collateral — receivable itself is the security','Non-recourse factoring transfers credit risk to factor','Factor handles overseas collections — reduces admin burden','Off-balance-sheet — improves working capital ratios','Works without an LC — ideal for open account exports'],
+      cons:['Higher cost than bank credit (1–3% fee + interest on advance)','Buyer must be acceptable to the factor','Recourse factoring leaves credit risk with exporter'],
+      ex:{ title:'Export Factoring vs FDBP — $100,000, 90-day credit', scenario:'Open account invoice for <strong>$100,000</strong>, 90-day terms. No LC. USD/INR = <strong>84.50</strong>.',
+        rows:[['— Export Factoring —',''],['Factor advances 85% immediately','$85,000'],['Factoring fee (2% of $100K)','−$2,000'],['Balance on buyer payment (90 days)','$13,000'],['Total realised (non-recourse)','$98,000'],['— vs FDBP (requires LC) —',''],['Advance 100% at bank TT','$100,000'],['Interest @ 8.5% / 90 days','−$2,125'],['Total realised (with recourse)','$97,875']],
+        note:'Factoring is marginally costlier but works without an LC and gives non-recourse credit protection — ideal for SMEs dealing with repeat buyers on open account.' }},
+
+    { type:'fund', stripe:'exp-stripe', instrument:'Export Credit (EPC) — Pre-Shipment Running Account', tags:['tag-exp:Exporter','tag-fund:Fund-Based','tag-pre:Pre-Shipment'], rate:'~8–9% p.a.',
+      desc:'A running account (revolving credit) facility for exporters with multiple orders. Rather than opening fresh PCFC for each order, the exporter draws and repays within a sanctioned limit — ideal for high-frequency exporters.',
+      pros:['Revolving structure — draw, repay, redraw within limit','Single sanction for the year vs multiple PCFC applications','Interest only on drawn amount','Supports multiple buyers and currencies'],
+      cons:['Requires clean export track record for running account sanction','Audit trail of orders required for each drawdown','Limit reviewed annually'],
+      ex:{ title:'EPC Running Account — Garment Exporter', scenario:'Exporter has ₹5Cr EPC running limit. Quarterly exports = ₹3–4Cr.',
+        rows:[['Limit sanctioned','₹5,00,00,000'],['Avg utilisation (70%)','₹3,50,00,000'],['Interest paid (8.5% on utilised amount)','₹29,75,000 / year'],['vs 4 × PCFC applications','₹35,00,000 / year est.'],['Saving (processing + interest)','≈ ₹5,25,000+/year']],
+        note:'Running account saves both interest cost and documentation time for exporters with steady order flows.' }},
+
+    // ── NON FUND-BASED ──────────────────────────────────────────────────────
+    { type:'nonfund', stripe:'nfb-stripe', instrument:'Export Letter of Credit (LC) — Irrevocable', tags:['tag-exp:Exporter','tag-nfb:Non Fund-Based','tag-pre:Pre-Shipment'], rate:'0.25–0.5% / quarter',
+      desc:'An LC issued by the buyer\'s bank guaranteeing payment to the exporter upon presentation of compliant documents. For the exporter, an LC is a risk-free payment assurance and enables PCFC drawdown.',
+      pros:['Payment guaranteed by bank — eliminates buyer default risk','Enables PCFC/PCFC-FC against LC security','Confirmed LC adds second bank\'s guarantee (useful for emerging market buyers)','Discountable at sight or usance terms'],
+      cons:['Document compliance is strict — discrepancies delay payment','LC charges deducted from proceeds','Does not protect against issuing bank insolvency (unless confirmed)'],
+      ex:{ title:'How Export LC Enables Cheaper Financing', scenario:'Exporter in Surat receives LC for $200,000 from UAE buyer.',
+        rows:[['LC received (irrevocable)','$200,000'],['PCFC sanctioned against LC (85%)','$170,000'],['SOFR+1.5% interest / 120 days','−$3,866'],['LC confirmation charge (0.3%)','−$600'],['Net pre-shipment liquidity','$165,534']],
+        note:'LC security allows the bank to sanction PCFC, reducing pre-shipment borrowing cost by ~2–3% vs unsecured WC.' }},
+
+    { type:'nonfund', stripe:'nfb-stripe', instrument:'Bank Guarantee — Bid Bond / Performance Bond', tags:['tag-exp:Exporter','tag-nfb:Non Fund-Based','tag-pre:Pre-Shipment'], rate:'0.5–2% p.a.',
+      desc:'Bank issues a guarantee on behalf of the exporter to the overseas buyer: bid bond (guarantee to enter contract if selected), performance bond (guarantee to perform contract terms), or advance payment guarantee.',
+      pros:['Frees up cash — no need to deposit security money with buyer','Internationally accepted instrument','Multiple types: bid, performance, advance payment, warranty','Enables competing for large government / project contracts'],
+      cons:['First-demand guarantees can be invoked without dispute resolution','Full value of guarantee blocks the exporter\'s credit limit','Invocation triggers immediate bank payment to beneficiary'],
+      ex:{ title:'Performance Guarantee — Project Export', scenario:'Indian EPC company wins $5M infrastructure contract in Africa.',
+        rows:[['Performance guarantee (10% of contract)','$500,000'],['BG commission @ 1.5% p.a. / 2 years','−$15,000'],['Cash freed vs physical deposit','$500,000'],['Return on freed cash @ 7% / 2 years','≈ +$70,000'],['Net benefit of BG over cash deposit','≈ $55,000']],
+        note:'Bank guarantee allows the exporter to deploy capital productively vs depositing it as security with the overseas buyer.' }},
+  ],
+
+  import: [
+    // ── FUND-BASED ──────────────────────────────────────────────────────────
+    { type:'fund', stripe:'imp-stripe', instrument:"Buyer's Credit", tags:['tag-imp:Importer','tag-fund:Fund-Based','tag-post:Post-Shipment'], rate:'SOFR + ~0.5–1%',
+      desc:"A foreign bank pays the Indian importer's overseas supplier directly on behalf of the Indian importer. The importer repays the foreign bank in USD after 180–360 days — cheap foreign-currency credit for imports.",
+      pros:["Very low cost — SOFR-linked, often 3–5% cheaper than INR import loan","Supplier paid at sight — strengthens supplier relationship","Defers USD outflow by 180–360 days — helps working capital","RBI permits up to $20M for goods; no ceiling for capex"],
+      cons:["INR depreciation risk at maturity — if ₹ weakens, repayment costs more","Requires Letter of Undertaking (LoU) from Indian bank","Minimum transaction size ($250K+) limits SME access"],
+      ex:{ title:"Buyer's Credit — $500,000 Capital Equipment Import", scenario:'Indian manufacturer imports machinery for $500,000. USD/INR = <strong>84.50</strong>.',
+        rows:[["Foreign bank pays supplier at sight","$500,000"],["Buyer's credit rate (SOFR 5.3% + 0.8%) / 360 days","−$30,550"],["vs INR import loan @ 10.5% / year","−₹44,47,500 (≈ $52,634)"],["Saving vs INR loan (approx.)","≈ $22,000 (₹18.6L)"],["USD repaid at maturity (360 days)","$530,550"]],
+        note:"Buyer's Credit is the default choice for large capital imports. Book a forward contract on day 1 to hedge the maturity USD payment." }},
+
+    { type:'fund', stripe:'imp-stripe', instrument:"Supplier's Credit", tags:['tag-imp:Importer','tag-fund:Fund-Based','tag-pre:Pre-Shipment'], rate:'Negotiated with supplier',
+      desc:"The overseas supplier extends credit directly to the Indian importer — goods are shipped first, payment follows in USD after an agreed period (typically 180–360 days). Governed by RBI ECB guidelines.",
+      pros:["Simple — credit extended by supplier, no third-party bank needed","Useful when buyer's credit is unavailable or uneconomical","Supplier bears credit risk during transit","Can be for up to 3 years on capital goods"],
+      cons:["Rate negotiated with supplier — may be higher than buyer's credit","Subject to RBI all-in cost ceiling (currently 500 bps over benchmark)","Documentation: import invoice, signed credit agreement, AD bank reporting"],
+      ex:{ title:"Supplier's Credit — Chemical Raw Material Import", scenario:'Importer purchases $200,000 of chemicals, 180-day supplier credit at 6% p.a.',
+        rows:[['Goods received today','$200,000'],["Supplier's credit interest (6% / 180 days)","$6,000"],["Total payment at 180 days","$206,000"],["vs INR WC loan @ 10.5% on ₹1,69,00,000","₹8,87,250 interest"],["USD forward rate (180 days, ~1% premium)","₹85.35"],["Total INR cost at maturity","₹1,75,82,100"]],
+        note:"Supplier's credit is convenient for raw material imports with established supplier relationships — avoid where supplier charges above RBI all-in cost ceiling." }},
+
+    { type:'fund', stripe:'imp-stripe', instrument:'Import Factoring (Reverse Factoring)', tags:['tag-imp:Importer','tag-fund:Fund-Based','tag-post:Post-Shipment'], rate:'1–2.5% of invoice',
+      desc:'The importer\'s factor pays the overseas supplier immediately on behalf of the importer. The importer then repays the factor after the credit period. Also called supply chain finance — improves supply chain liquidity.',
+      pros:['Supplier gets paid immediately (improves relationship & pricing)','Importer gets extended payment terms (60–120 days)','No need for LC issuance per transaction','Improves working capital and payables management'],
+      cons:['Factor must approve supplier and importer','Somewhat higher cost than LC-based import finance','Limited to pre-approved suppliers and geographies'],
+      ex:{ title:'Reverse Factoring — Retail Importer', scenario:'Indian importer imports $300,000 of goods from Vietnam, 90-day terms.',
+        rows:[['Factor pays supplier immediately','$300,000'],['Factor fee (1.5% for 90 days)','−$4,500'],['Importer repays factor at 90 days','$304,500'],['Supplier discount (1% for immediate payment)','−$3,000'],['Effective net cost to importer','$1,500 (0.5%)']],
+        note:'When the supplier offers an early payment discount, reverse factoring can be near-zero net cost to the importer while giving the supplier immediate cash.' }},
+
+    // ── NON FUND-BASED ──────────────────────────────────────────────────────
+    { type:'nonfund', stripe:'nfb-stripe', instrument:'Import Letter of Credit (Sight / Usance)', tags:['tag-imp:Importer','tag-nfb:Non Fund-Based','tag-pre:Pre-Shipment'], rate:'0.25–0.75% / quarter',
+      desc:'The importer\'s bank issues an LC guaranteeing payment to the overseas supplier upon receipt of compliant documents. Sight LC = immediate payment; Usance LC = deferred payment (30/60/90/180 days) — effectively free credit from supplier.',
+      pros:['Supplier assured of payment — can ship without worry','Usance LC gives deferred payment — 90-day free financing','Documents-based — protects importer against non-shipment','LC enables negotiation with supplier for better pricing'],
+      cons:['Cash margin (10–25%) blocked with issuing bank','Strict document compliance — minor discrepancy triggers refusal','LC commission payable on full value'],
+      ex:{ title:'Usance LC (90 days) — Chemical Import', scenario:'Indian importer opens Usance LC for <strong>$200,000</strong> chemicals.',
+        rows:[['LC opened (contingent)','$200,000'],['Cash margin (10%) blocked','₹16,90,000'],['LC commission (0.5% × 90/360)','₹21,125'],['Documents accepted — bank pays at 90 days','Deferred'],['Forward rate locked @ ₹85.56 (90-day)','₹1,71,12,000'],['Total cost including commission','₹1,71,33,125']],
+        note:'Importer books forward contract on LC opening day to lock the 90-day rate, eliminating all forex risk. This is the most common import structure in India.' }},
+
+    { type:'nonfund', stripe:'nfb-stripe', instrument:'Standby Letter of Credit (SBLC)', tags:['tag-imp:Importer','tag-nfb:Non Fund-Based'], rate:'1–2% p.a.',
+      desc:"A secondary payment guarantee — bank pays only if the importer <em>defaults</em>. Unlike commercial LC, SBLC is not intended to be drawn; it's a safety net. Used for long-term supply contracts and project imports.",
+      pros:['Cheaper than commercial LC for long-term relationships','One SBLC covers multiple shipments under the facility','Enables open account trade — supplier ships without LC per shipment','Annual fee vs per-transaction LC commission'],
+      cons:['First-demand: invoked without dispute rights','Bank contingent exposure remains real','Not usable for first-time suppliers who need payment certainty'],
+      ex:{ title:'SBLC — Long-Term Supply Contract', scenario:'Indian importer has a 2-year supply agreement at $5M per year.',
+        rows:[['SBLC issued for annual volume','$5,000,000'],['SBLC fee @ 1.5% p.a.','$75,000'],['vs Commercial LC per shipment (monthly)','~$75,000 / quarter'],['Annual LC fee (approx.)','$300,000'],['Cost saving via SBLC vs per-shipment LC','≈ $225,000 / year (75% saving)']],
+        note:'SBLC makes economic sense for importers with established supplier relationships importing on regular, predictable schedules.' }},
+
+    { type:'nonfund', stripe:'nfb-stripe', instrument:'Deferred Payment Guarantee (DPG)', tags:['tag-imp:Importer','tag-nfb:Non Fund-Based','tag-pre:Pre-Shipment'], rate:'0.5–1.5% p.a.',
+      desc:"Bank guarantees the importer's deferred payment obligations to an overseas supplier under a term loan arrangement. Commonly used for capital goods imported on 3–5 year deferred payment terms.",
+      pros:['Enables capital goods acquisition with 3–5 year payment spread','Supplier receives bank guarantee instead of immediate cash','Lower upfront capex outflow for the importer','RBI permits DPG for capital goods imports'],
+      cons:['Repayment in forex — full exchange rate risk over multi-year period','Bank DPG limit reduces other credit headroom','Interest cost on deferred amount must be within RBI all-in ceiling'],
+      ex:{ title:'DPG — Capital Equipment on Deferred Terms', scenario:'Indian textile mill imports $2M machinery on 5-year deferred payment.',
+        rows:[['Machinery imported today','$2,000,000'],['DPG issued (bank guarantee)','$2,000,000'],['DPG fee @ 1% p.a. × 5 years','$100,000'],['Deferred interest (6% p.a. on reducing)','~$320,000'],['vs Term loan from Indian bank @ 10.5%','~$560,000'],['Saving vs INR term loan','≈ $140,000']],
+        note:'DPG + deferred payment from supplier is the cheapest route for large capital goods imports when supplier offers competitive deferred payment rates.' }},
+  ],
+
+  domestic: [
+    // ── FUND-BASED ──────────────────────────────────────────────────────────
+    { type:'fund', stripe:'dom-stripe', instrument:'Cash Credit (CC) / Overdraft (OD)', tags:['tag-dom:Domestic','tag-fund:Fund-Based'], rate:'9–11% p.a.',
+      desc:'A revolving credit facility where the bank sanctions a limit and the borrower can draw and repay freely within that limit. Interest charged only on the amount drawn daily. The backbone of Indian business working capital.',
+      pros:['Most flexible — draw and repay anytime within limit','Interest only on utilised balance (daily debit balance)','Revolving — no need to re-apply for each drawdown','Accepted across all banks and sizes'],
+      cons:['Secured against stock + debtors (drawing power limits apply)','Monthly stock statements required','Review/renewal required annually','Higher rate than term loans'],
+      ex:{ title:'CC Account — Manufacturing Company', scenario:'MSME manufacturer with ₹1Cr CC limit, avg utilisation 70%.',
+        rows:[['CC limit sanctioned','₹1,00,00,000'],['Avg daily utilisation (70%)','₹70,00,000'],['Interest @ 10% p.a. on ₹70L','₹7,00,000/year'],['Peak month utilisation (100%)','₹1,00,00,000'],['Drawing power (80% of stock + 90% debtors)','Calculated monthly']],
+        note:'Interest saving vs always drawing full limit: ₹3,00,000/year at 10%. Monitor drawing power to avoid exceeding it — triggers NPA classification.' }},
+
+    { type:'fund', stripe:'dom-stripe', instrument:'Domestic Bill Discounting (DBD)', tags:['tag-dom:Domestic','tag-fund:Fund-Based'], rate:'9–11% p.a.',
+      desc:'Supplier sells (discounts) its trade receivables (invoices raised on domestic buyers) to a bank at a small discount. Bank gives immediate cash; collects from buyer on due date. Converts credit sales to immediate cash.',
+      pros:['Immediate liquidity against credit sales without waiting','Off-balance-sheet — does not show as bank debt','No collateral other than the invoice','Improves cash conversion cycle significantly'],
+      cons:['With recourse — if buyer defaults, supplier must repay bank','Rate depends on buyer credit rating','Not all buyers accepted by banks for discounting'],
+      ex:{ title:'Bill Discounting — Supplier to Large Corporate', scenario:'MSME supplier raises ₹50L invoice on AAA-rated corporate buyer, 90-day credit.',
+        rows:[['Invoice raised on buyer','₹50,00,000'],['Discounting rate (9.5% / 90 days)','−₹1,18,750'],['Net cash received today','₹48,81,250'],['Bank collects from buyer at day 90','₹50,00,000'],['Cost of early cash realisation','₹1,18,750 (2.375%)']],
+        note:'Bill discounting is the fastest route to liquidity for MSME suppliers to large companies. Cost equals the time value of the credit period.' }},
+
+    { type:'fund', stripe:'dom-stripe', instrument:'Invoice Financing / TReDS', tags:['tag-dom:Domestic','tag-fund:Fund-Based'], rate:'7–10% p.a.',
+      desc:'TReDS (Trade Receivables Discounting System) is RBI-mandated digital platform where MSMEs upload invoices accepted by large corporate buyers and financiers bid to discount them. Transparent, competitive rates.',
+      pros:['Competitive rates — multiple financiers bid on same invoice','MSME gets rate transparency unlike bank bilateral deals','Corporate buyer acceptance removes credit risk for financier','RBI-regulated platform — RXIL, M1xchange, Invoicemart'],
+      cons:['Large buyer must be onboarded on the platform','Minimum invoice sizes apply on some platforms','Settlement T+1 or T+2, not instant'],
+      ex:{ title:'TReDS — MSME Supplier on RXIL', scenario:'MSME uploads ₹25L invoice accepted by an auto OEM on TReDS.',
+        rows:[['Invoice uploaded and accepted by buyer','₹25,00,000'],['Best bid from financier (8.2% p.a. / 60 days)','−₹33,699'],['Net proceeds to MSME','₹24,66,301'],['vs CC rate (10.5%) for same amount/period','−₹43,151'],['Saving via TReDS','₹9,452 per invoice']],
+        note:'TReDS is the most cost-efficient option for MSME suppliers to GST-registered large corporates. Onboard your top 5 buyers to unlock competitive rates.' }},
+
+    { type:'fund', stripe:'dom-stripe', instrument:'Working Capital Demand Loan (WCDL)', tags:['tag-dom:Domestic','tag-fund:Fund-Based'], rate:'8.5–10.5% p.a.',
+      desc:'A short-term demand loan (7–360 days) drawn in a lump sum against the borrower\'s working capital sanction. Better rate than CC/OD when the borrower knows the exact amount and duration needed.',
+      pros:['Lower rate than CC by 0.25–0.75% p.a. (fixed for tenure)','Clean drawdown — no daily balance management','Ideal for specific one-off requirements (seasonal inventory build, GST payment)','Repaid in bullet at maturity'],
+      cons:['Not revolving — must repay and redraw for new requirement','Early repayment penalty may apply','Requires clear purpose and repayment plan'],
+      ex:{ title:'WCDL — Seasonal Inventory Build', scenario:'Garment exporter needs ₹2Cr for fabric procurement for Q3 season.',
+        rows:[['WCDL drawn','₹2,00,00,000'],['Rate: 9.25% p.a. / 90 days','₹4,62,500 interest'],['CC rate for same: 10.5% p.a. / 90 days','₹5,25,000 interest'],['Saving vs CC','₹62,500 (12% saving)'],['Repaid in bullet at day 90','₹2,04,62,500']],
+        note:'WCDL is the optimal tool when you know exactly how much and for how long — the rate advantage compounds significantly on large ticket amounts.' }},
+
+    { type:'fund', stripe:'dom-stripe', instrument:'Channel Finance / Dealer Finance', tags:['tag-dom:Domestic','tag-fund:Fund-Based'], rate:'9–12% p.a.',
+      desc:'Bank finances the dealer/distributor network of a large corporate (anchor). Dealer gets inventory funding; corporate gets faster receivable realisation. Bank relies on corporate\'s credit and offtake guarantee.',
+      pros:['Dealers get low-cost credit based on corporate anchor credit rating','Corporate clears its books faster — faster working capital cycle','Bank gets low-risk portfolio backed by anchor guarantee','Standardised documentation — quick disbursement'],
+      cons:['Dependent on anchor corporate — downturn risks cascade','Dealer must be in bank\'s approved network','Secured against hypothecation of financed goods'],
+      ex:{ title:'Channel Finance — Auto Dealership', scenario:'Auto OEM partners with bank to finance dealership inventory.',
+        rows:[['Dealer orders 10 vehicles @ ₹8L each','₹80,00,000'],['Channel finance from bank (90% of invoice)','₹72,00,000'],['Rate: 9.5% p.a. / 60 days','₹1,12,328 interest'],['Dealer sells vehicles and repays bank','By day 60'],['vs Dealer own funds deployed','₹72L freed for other use']],
+        note:'Channel finance is the primary reason large retail dealer networks (auto, consumer durables, agri equipment) can maintain large inventories without blocking their own capital.' }},
+
+    // ── NON FUND-BASED ──────────────────────────────────────────────────────
+    { type:'nonfund', stripe:'nfb-stripe', instrument:'Domestic Bank Guarantee (BG)', tags:['tag-dom:Domestic','tag-nfb:Non Fund-Based'], rate:'0.5–2% p.a.',
+      desc:'Bank issues a guarantee on behalf of the domestic company to a third party (government, PSU, contractor) promising to pay a sum if the company fails to fulfil its obligation. Replaces need for cash deposits.',
+      pros:['Frees locked cash — no need to deposit earnest money / security deposits','Enables participation in government / PSU tenders','Performance, bid, advance payment, financial guarantees all available','Commission paid only on outstanding value'],
+      cons:['First-demand invocation — bank pays without investigation','Full value blocks credit limit','Invocation risk if project execution fails'],
+      ex:{ title:'Bid Bond BG — Government Tender', scenario:'Infrastructure company bids for ₹50Cr government road project.',
+        rows:[['Tender EMD required (2%)','₹1,00,00,000'],['BG issued in lieu of cash EMD','₹1,00,00,000'],['BG commission (1.5% p.a. / 3 months)','₹37,500'],['Return on freed ₹1Cr @ 7.5% FD / quarter','₹1,87,500'],['Net benefit of BG vs cash EMD','₹1,50,000 per tender']],
+        note:'Large infrastructure and manufacturing companies save crores annually by using BGs for EMDs, security deposits, and advance payment guarantees rather than blocking cash.' }},
+
+    { type:'nonfund', stripe:'nfb-stripe', instrument:'Letter of Credit — Domestic (DLOC)', tags:['tag-dom:Domestic','tag-nfb:Non Fund-Based'], rate:'0.25–0.5% / quarter',
+      desc:'Domestic LC issued for procurement between two Indian companies. Buyer\'s bank issues LC to seller — seller gets payment assurance and can use LC for bill discounting. Common in steel, cement, commodity purchases.',
+      pros:['Seller gets payment certainty — reduces credit risk','Seller can discount LC-backed bills at low rates (often 7.5–8%)','Buyer gets extended credit via usance DLOC','Ensures supply — seller prioritises LC-backed orders'],
+      cons:['Cash margin blocked at buyer\'s bank','LC commission cost','Document compliance required even for domestic trade'],
+      ex:{ title:'Domestic LC — Steel Procurement', scenario:'Manufacturer purchases ₹1Cr of steel on 90-day Usance DLOC.',
+        rows:[['DLOC issued to steel supplier','₹1,00,00,000'],['Cash margin (10%)','₹10,00,000 blocked'],['LC commission (0.35% × 90/360)','₹8,750'],['Supplier discounts LC bill @ 8%','gets ₹98,00,000 now'],['Buyer pays bank at 90 days','₹1,00,00,000']],
+        note:'Domestic LCs are common in commodity supply chains where sellers require payment security before extending 90-day credit to buyers.' }},
+  ]
+};
+
+// current state
+let currentCategory = null;
+let currentSubFilter = 'all';
+
+function selectCategory(cat) {
+  currentCategory = cat;
+  currentSubFilter = 'all';
+
+  const titles = { export:'Export Finance Products', import:'Import Finance Products', domestic:'Domestic Working Capital Finance' };
+  document.getElementById('detail-nav-title').textContent = titles[cat];
+
+  // hide category grid, show detail panel
+  document.querySelector('.cat-grid').style.display = 'none';
+  document.getElementById('tf-detail-panel').style.display = 'block';
+
+  // reset sub-filter buttons
+  document.querySelectorAll('.tf-filter').forEach(b => b.classList.remove('active'));
+  document.getElementById('sub-all').classList.add('active');
+
+  renderProducts(cat, 'all');
+  window.scrollTo({top: document.getElementById('tf-detail-panel').offsetTop - 80, behavior:'smooth'});
+}
+
+function closeCategory() {
+  currentCategory = null;
+  document.querySelector('.cat-grid').style.display = 'grid';
+  document.getElementById('tf-detail-panel').style.display = 'none';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function subFilter(type, btn) {
+  currentSubFilter = type;
+  document.querySelectorAll('.tf-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts(currentCategory, type);
+}
+
+function renderProducts(cat, typeFilter) {
+  const products = TF_DATA[cat] || [];
+  const filtered = typeFilter === 'all' ? products : products.filter(p => p.type === typeFilter);
+  const rate = currentRate || 84.50;
+  const grid = document.getElementById('tf-grid');
+
+  // Section sub-labels
+  const fundItems = filtered.filter(p=>p.type==='fund');
+  const nfbItems  = filtered.filter(p=>p.type==='nonfund');
+
+  let html = '';
+
+  if(typeFilter === 'all') {
+    if(fundItems.length) {
+      const catLabels = { export:'EXPORTER · FUND-BASED', import:'IMPORTER · FUND-BASED', domestic:'DOMESTIC · FUND-BASED' };
+      const catDescs = { export:'Bank advances actual cash — interest-bearing credit', import:'Bank funds import payments — repayable in forex', domestic:'INR working capital advances against stock & debtors' };
+      const badgeCls = { export:'tsl-exp', import:'tsl-imp', domestic:'tsl-dom' };
+      html += `<div class="tf-section-label" style="grid-column:1/-1;">
+        <span class="tsl-badge ${badgeCls[cat]}">${catLabels[cat]}</span>
+        <span class="tsl-desc">${catDescs[cat]}</span>
+      </div>`;
+    }
+    fundItems.forEach(p => { html += buildCard(p, rate); });
+    if(nfbItems.length) {
+      const catLabels2 = { export:'EXPORTER · NON FUND-BASED', import:'IMPORTER · NON FUND-BASED', domestic:'DOMESTIC · NON FUND-BASED' };
+      const catDescs2 = { export:'Contingent — no cash outflow, limits set aside', import:'Guarantees & LC issuance — cash blocked as margin only', domestic:'Guarantees & LCs for domestic trade obligations' };
+      const badgeCls = { export:'tsl-exp', import:'tsl-imp', domestic:'tsl-dom' };
+      html += `<div class="tf-section-label" style="grid-column:1/-1;margin-top:20px;">
+        <span class="tsl-badge tsl-nfb">${catLabels2[cat]}</span>
+        <span class="tsl-desc">${catDescs2[cat]}</span>
+      </div>`;
+      nfbItems.forEach(p => { html += buildCard(p, rate); });
+    }
+  } else {
+    filtered.forEach(p => { html += buildCard(p, rate); });
+  }
+
+  if(!filtered.length) html = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:12px;">No products in this filter.</div>`;
+  grid.innerHTML = html;
+
+  // build comparison table
+  buildCmpTable(filtered);
+}
+
+function buildCard(p, rate) {
+  const tags = p.tags.map(t => { const [cls,lbl] = t.split(':'); return `<span class="tf-tag ${cls}">${lbl}</span>`; }).join('');
+  const pros = p.pros.map(x=>`<li>${x}</li>`).join('');
+  const cons = p.cons.map(x=>`<li>${x}</li>`).join('');
+  const rows = p.ex.rows.map(([l,v]) => {
+    const cls = v.startsWith('−') || v.startsWith('-') ? 'neg' : (v.startsWith('≈ +') || v.startsWith('+') ? 'pos' : '');
+    return `<div class="tf-ex-row ${v===''?'tf-ex-subhd':''}"><span>${l}</span><span class="ex-num ${cls}">${v}</span></div>`;
+  }).join('');
+
+  const exBg = p.stripe === 'exp-stripe' ? 'rgba(201,168,76,0.04)' : p.stripe === 'imp-stripe' ? 'rgba(0,188,212,0.04)' : 'rgba(76,175,80,0.04)';
+  const exBorder = p.stripe === 'exp-stripe' ? 'rgba(201,168,76,0.15)' : p.stripe === 'imp-stripe' ? 'rgba(0,188,212,0.15)' : 'rgba(76,175,80,0.15)';
+  const exLabelColor = p.stripe === 'exp-stripe' ? 'var(--gold)' : p.stripe === 'imp-stripe' ? 'var(--teal)' : 'var(--green2)';
+
+  return `<div class="tf-card">
+    <div class="tf-card-stripe ${p.stripe}"></div>
+    <div class="tf-card-header">
+      <div><div class="tf-instrument">${p.instrument}</div><div class="tf-tags">${tags}</div></div>
+      <div class="tf-rate-badge ${p.stripe==='imp-stripe'?'teal-badge':p.stripe==='dom-stripe'?'green-badge':''}">${p.rate}</div>
+    </div>
+    <div class="tf-body">
+      <p class="tf-desc">${p.desc}</p>
+      <div class="tf-adv-grid">
+        <div class="tf-adv"><div class="tf-adv-title">✅ Advantages</div><ul class="tf-list">${pros}</ul></div>
+        <div class="tf-adv"><div class="tf-adv-title">⚠️ Limitations</div><ul class="tf-list">${cons}</ul></div>
+      </div>
+      <div class="tf-example" style="background:${exBg};border-color:${exBorder};">
+        <div class="tf-ex-label" style="color:${exLabelColor};">📌 ${p.ex.title}</div>
+        <div class="tf-ex-body">
+          <div class="tf-ex-scenario">${p.ex.scenario}</div>
+          <div class="tf-ex-table">${rows}</div>
+          <div class="tf-ex-note">${p.ex.note}</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildCmpTable(products) {
+  if(!products.length) { document.getElementById('cmp-label').style.display='none'; return; }
+  document.getElementById('cmp-label').style.display='block';
+  const typeLabel = { fund:'Fund-Based', nonfund:'Non Fund-Based' };
+  const rows = products.map(p => {
+    const typeCls = p.type==='fund' ? 'tag-fund' : 'tag-nfb';
+    const catCls  = p.stripe==='exp-stripe' ? 'tag-exp' : p.stripe==='imp-stripe' ? 'tag-imp' : 'tag-dom';
+    const catLbl  = p.stripe==='exp-stripe' ? 'Exporter' : p.stripe==='imp-stripe' ? 'Importer' : 'Domestic';
+    const stg = p.tags.find(t=>t.includes('Pre-Shipment')) ? 'Pre-ship' : p.tags.find(t=>t.includes('Post-Shipment')) ? 'Post-ship' : 'Ongoing';
+    const cur = p.rate.includes('SOFR') || p.tags.some(t=>t.includes('Exporter')||t.includes('Importer')) && p.type==='fund' ? 'USD/INR' : 'INR';
+    const benefit = p.pros[0];
+    const risk    = p.cons[0];
+    return `<tr><td>${p.instrument}</td><td><span class="tf-tag ${typeCls}" style="font-size:9px;">${typeLabel[p.type]}</span></td><td>${stg}</td><td style="font-family:'IBM Plex Mono',monospace;font-size:11px;">${p.rate}</td><td>${benefit}</td><td>${risk}</td></tr>`;
+  }).join('');
+  document.getElementById('tf-cmp-body').innerHTML = rows;
+}
+
+// alias for data access
+const TF_DATA = TF_PRODUCTS;
+
+// ── HOME DASHBOARD UPDATER ─────────────────────────────────────────────────
+function updateHomeDashboard(rate) {
+  const f4 = fmt(rate,4);
+  // hero + ticker
+  const hn = document.getElementById('hh-rate-val'); if(hn) hn.textContent = f4;
+  ['ht-spot'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent='₹'+f4; });
+  const ib=fmt(rate,4), ex=fmt(rate*0.985,4), fwd=fmt(rate*1.00375,4), rbi=fmt(rate*0.999,4), sbi=fmt(rate*0.982,4);
+  const idMap = {'ht-ib':'₹'+ib,'ht-fwd':'₹'+fwd,'ht-rbi':'₹'+rbi,'ht-exp':'₹'+ex,'ht-sbi':'₹'+sbi};
+  Object.entries(idMap).forEach(([id,v])=>{ const el=document.getElementById(id); if(el) el.textContent=v; });
+  // stats row
+  const smMap = {'hs-spot':'₹'+f4,'hs-hi':'₹'+fmt(rate*1.003,4),'hs-lo':'₹'+fmt(rate*0.997,4),'hs-exp':'₹'+ex,'hs-fwd':'₹'+fwd};
+  Object.entries(smMap).forEach(([id,v])=>{ const el=document.getElementById(id); if(el) el.textContent=v; });
+  // change badge on home hero
+  if(prevRate){
+    const d=rate-prevRate, p=(d/prevRate*100).toFixed(3);
+    const hc=document.getElementById('hh-change');
+    if(hc){ hc.textContent=(d>=0?'▲ +':'▼ ')+fmt(Math.abs(d),4)+' ('+Math.abs(p)+'%)'; hc.className='hh-badge '+(d>=0?'up':'down'); }
+  }
+  const hu=document.getElementById('hh-updated');
+  if(hu){ const now=new Date(); hu.textContent='Updated '+now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); }
+  // cross rate home ticker
+  if(rateEURINR){ const el=document.getElementById('ht-eurinr'); if(el) el.textContent='₹'+fmt(rateEURINR,4); }
+  if(rateGBPINR){ const el=document.getElementById('ht-gbpinr'); if(el) el.textContent='₹'+fmt(rateGBPINR,4); }
+  if(rateCNYINR){ const el=document.getElementById('ht-cnyinr'); if(el) el.textContent='₹'+fmt(rateCNYINR,4); }
+}
+
+// ── ENQUIRY FORM ────────────────────────────────────────────────────────────
+// textarea char counter
+const txArea = document.getElementById('enq-message');
+if(txArea) txArea.addEventListener('input', ()=>{ const c=document.getElementById('enq-char'); if(c) c.textContent=txArea.value.length; });
+
+function validateEnquiry() {
+  let ok = true;
+  const name  = document.getElementById('enq-name').value.trim();
+  const phone = document.getElementById('enq-phone').value.trim();
+  const email = document.getElementById('enq-email').value.trim();
+  const biz   = document.getElementById('enq-biz').value;
+
+  const setErr = (id, msg) => { const el=document.getElementById(id); if(el) el.textContent=msg; };
+  setErr('err-name',''); setErr('err-phone',''); setErr('err-email',''); setErr('err-biz','');
+
+  if(!name) { setErr('err-name','Name is required'); ok=false; }
+  if(!phone || !/^[+\d\s\-()]{7,15}$/.test(phone)) { setErr('err-phone','Enter a valid phone number'); ok=false; }
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setErr('err-email','Enter a valid email address'); ok=false; }
+  if(!biz) { setErr('err-biz','Please select a business type'); ok=false; }
+
+  return ok;
+}
+
+function submitEnquiry() {
+  if(!validateEnquiry()) return;
+
+  const name    = document.getElementById('enq-name').value.trim();
+  const phone   = document.getElementById('enq-phone').value.trim();
+  const email   = document.getElementById('enq-email').value.trim();
+
+  // simulate submission (replace with real API call if needed)
+  const btnTxt  = document.getElementById('enq-btn-txt');
+  const btnSpin = document.getElementById('enq-btn-spin');
+  btnTxt.style.display = 'none';
+  btnSpin.style.display = 'inline-block';
+
+  setTimeout(() => {
+    document.getElementById('enq-form-wrap').style.display = 'none';
+    const suc = document.getElementById('enq-success');
+    suc.style.display = 'flex';
+    document.getElementById('enq-success-name').textContent = name;
+    document.getElementById('enq-success-contact').textContent = email + ' / ' + phone;
+    btnTxt.style.display = 'inline'; btnSpin.style.display = 'none';
+  }, 1200);
+}
+
+function resetEnquiry() {
+  ['enq-name','enq-phone','enq-email','enq-company','enq-message'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  ['enq-biz','enq-product','enq-size'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  const cc=document.getElementById('enq-char'); if(cc) cc.textContent='0';
+  ['err-name','err-phone','err-email','err-biz'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=''; });
+  document.getElementById('enq-success').style.display = 'none';
+  document.getElementById('enq-form-wrap').style.display = 'block';
+}
+
+// ── INIT ───────────────────────────────────────────────────────────────────
+syncPaisa('exp'); syncPaisa('imp'); calcOil();
+fetchRate(); loadChart(7, null);
+setInterval(fetchRate, 60000);
+</script>
+</body>
+</html>
